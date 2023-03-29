@@ -1,0 +1,301 @@
+<div class="col-3 mt-5">
+    <div class="buttons-header">
+        <h3>Subjects</h3>
+    </div>
+    <div class="sidebar">
+        <a href="#types"><button class="subject">Types</button></a>
+        <a href="#template-literals"><button class="subject">Template literals</button></a>
+        <a href="#mutable-immutable"><button class="subject">Mutable & immutable</button></a>
+        <a href="#falsy-truthy"><button class="subject">Falsy & Truthy</button></a>
+        <a href="#coercion"><button class="subject">Type coercion</button></a>
+        <a href="#equality"><button class="subject">Equality checks</button></a>
+        <a href="#spread"><button class="subject">Spread Operator</button></a>
+        <a href="#destructure"><button class="subject">Destructuring</button></a>
+    </div>
+</div>
+
+<div class="col-8 mt-5">
+    <h1>Datatypes</h1><br><br>
+
+    <h6>
+        <h3 id="types">Types</h3><br>
+        JavaScript has 8 different datatypes:<br><br>
+        <p>
+            - String<br>
+            - Number<br>
+            - Bigint<br>
+            - Boolean<br>
+            - Undefined<br>
+            - Null<br>
+            - Symbol<br>
+            - Object (Array, Object, Date etc.)
+        </p>
+        A variable can hold any type of data. Datatypes are important for the computer, so it safely can solve
+        different expressions.<br><br>
+
+        <h5>String</h5><br>
+        ' ' : defines a string<br>
+        " " : defines a string (recommended for english language)<br>
+        ` ` : back-tics defines a string for template literals<br><br><br>
+
+        <h5>Object (Date)</h5><br>
+        The Date object is a built-in object that represents a moment in time. It has methods to work with dates and time.<br>
+        There are different ways to get time:
+<pre>
+    <code>
+        app.get("/time/time", (req, res) => {
+            res.send({
+                timeUTC: new Date(),
+                timeLocal: Date(),
+                unixTimestamp: Date.now()
+            });
+        });
+
+        const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+        app.get("/time/day", (req, res) => {
+            res.send({ data: days[new Date().getDay()] });
+        });
+    </code>
+</pre>
+        <h3 id="template-literals">Template literals / string interpolation</h3><br>
+        A way to embed expressions (variables) inside string literals, and thereby create dynamic strings.They 
+        are easier to work with than concatenation:
+<pre>
+    <code>
+        const name = "Don";
+        const greeting = `Hello, ${ name }`;
+        console.log(greeting); // "Hello, Don"
+    </code>
+</pre>
+        <h3 id="mutable-immutable">Mutable & immutable</h3><br>
+        <h5>Mutable</h5><br> 
+        Datatypes are those whose values can be changes after they are created. These include <i>objects</i> and <i>arrays</i>:
+<pre>
+    <code>
+        const person = { name: "Don", age: 30 };
+        person.age = 31; // changed age value 
+    </code>
+</pre>
+        <h5>Immutable</h5><br> 
+        Datatypes are primitives such as <i>numbers, strings, booleans, null</i> and <i>undefined</i>. Once a value is assigned to 
+        any of these, it cannot be changed:
+<pre>
+    <code>
+        const message = "Buy apples!";
+        const newMessage = message.toUpperCase();
+        console.log(message); // "Buy apples!"
+        console.log(newMessage); // "BUY APPLES!"
+    </code>
+</pre> 
+        When applying a method such as .toUpperCase() it doesn't modify the original string, but creates a new one!<br><br><br>
+
+        <h3 id="falsy-truthy">Falsy & Truthy values</h3><br>
+        It's important to know there exist, especially because of the or-operator '||' that can cause problems,
+        if you are not careful. JavaScript always read the code from left to right, so it will always check the
+        left side value to see, if it is a falsy value, and here's where you need to be attentive:<br>
+<pre>
+    <code>
+        const playerOneScore = data.score || 5; // 5
+    </code>
+</pre>
+        If the score from the player actually is '0', the '0' value will be registered as a falsy value and it
+        will print out '5' instead. This can be solved by using the <span class="emphasis">nullish coalescing operator (??)</span>
+        that solves the 'falsy value 0 problem' because it only checks for <i>null</i> or <i>undefined</i>:<br><br>
+<pre>
+    <code>
+        const playerOneScore = data.score ?? 5; // 0 
+    </code>
+</pre>
+        <h5>Falsy values</h5><br>
+        Values that will always be false in a boolean context:
+        <p>
+            - false<br>
+            - 0<br>
+            - '' or "" or ``<br>
+            - null<br>
+            - undefined<br>
+            - NaN<br>
+            - 0n<br>
+            - document.all<br>
+            - error (because it is undefined)
+        </p>
+        If you use an if-statement with a falsy value, then the code will not execute:<br>
+<pre>
+    <code>
+        if (0) { }
+    </code>
+</pre>
+        <h5>Truthy values</h5><br>
+        If it is an object, it is always a truthy value:
+        <p>
+            - 'false'<br>
+            - '0'<br>
+            - [ ] (empty array)<br>
+            - { } (empty object)<br>
+            - function() { }<br>
+        </p>
+        If you use an if-statement with a truthy value, then the code will execute:<br><br>
+<pre>
+    <code>
+        if ([]) { }
+    </code>
+</pre>
+        <h3 id="coercion">Type coercion</h3><br>
+        "The process of automatic or implicit conversion of values from one datatype to another". This means you
+        <i>force</i> one datatype to be another. E.g. if you add a number and a string, JavaScript will treat
+        the number as a string:<br><br>
+<pre>
+    <code>
+        function coercion (number1, number2) {
+            return number1 + number2;
+        }
+
+        console.log(coercion(2, "2")); // "22"
+    </code>
+</pre>
+
+    <h3 id="equality">Equality checks</h3><br>
+    <div class="box-info">
+        <h5>===</h5><br>
+        Strict equality checks wether the two operands are equal (both type and value), returning a Boolean
+        as a result. It always considers operands of different types to be different.<br>
+<pre>
+    <code>
+        console.log(1 === 1); // true
+        console.log('hello' === 'hello'); // true
+        console.log(1 === '1'); // false
+        console.log('1234' === '4321'); // false
+        console.log(true === true); // true
+        console.log(-166 === 166); // false
+    </code>
+</pre>
+            <h5>==</h5><br>
+            Soft equality only checks for equality in value, not in type. When using soft equality, Javascript will 
+            attempt to coerce the two values to the same type when making the comparison, so be careful when using this:<br>
+<pre>
+    <code>
+        const a = 3;
+        console.log(a == 3); // true
+        console.log(a == "3"); // true
+        console.log(" " == 0); // true
+        console.log(" " == "0"); // false
+        console.log(null == undefined); // true
+    </code>
+</pre>
+    </div><br>
+
+    <h3 id="spread">Spread Operator (...)</h3><br>
+    <div class="box-info">
+        Used to expand an array or object (aka. iterables) into individual elements. It allows you to copy a part 
+        of an array or object into a new array or object, and is often used in combination with <i>destructuring</i>. It is good 
+        to use a spread operator if you're dealing with an object that has a lot of properties - in that case you 
+        don't need to write every single property down, because you can only focus on the specific properties you 
+        want to manipulate.
+<pre>
+    <code>
+        const numbers1 = [ 1,2,3 ];
+        const numbers2 = [ 4,5,6 ];
+        const numbersCombined = [ ...numbers1, ...numbers2 ];
+        console.log(numbersCombined); // 1,2,3,4,5,6
+
+        const car = { model: "Mustang", color: "red" };
+        const newCar = { year: 1999, color: "orange" };
+        const updatedCar = { ...car, ...newCar };
+        console.log(updatedCar); // { model: "Mustang", year: 1999, color: "orange" } 
+    </code>
+</pre>
+        The properties that do not match are combined, and the properties that match, here color, gets
+        overwritten by the last object that was passed in the updatedCar.<br><br>
+
+        <h5>Used in 3 different places</h5><br>
+        - Function arguments e.g. 
+<pre>
+    <code>
+        function('a', ...numbers1, 'b'); 
+    </code>
+</pre>
+        - Array literals e.g. 
+<pre>
+    <code>
+        [ 1, ...numbers1, '4', 'five', 6 ]; 
+    </code>
+</pre>
+        - Object literals e.g. 
+<pre>
+    <code>
+        { ...numbers1, key: 'value' }; 
+    </code>
+</pre>
+    </div><br>
+
+    <h3 id="destructure">Destructuring</h3><br>
+    <div class="box-info">
+        A feature that allows you to extract values from arrays or objects and assign them to variables.
+        You can thereby <i>target</i> and <i>access</i> specific properties. Reduces the amount of code. 
+        The order doesn't matter, because you refer to a "key" in the key-value pairs of iterables. 
+<pre>
+    <code>
+        // ARRAY DESTRUCTURING []
+
+        const [ first, second ] = [1,2];
+
+        // | equivalent to:
+
+        const first = 1;
+        const second = 2;
+
+        // could also be:
+
+        const [ firstNumber, ...theRest ] = [ 0, 1, 2, 3, 4 ];
+        console.log(theRest); // [1,2,3,4]
+
+
+        // OBJECT DESTRUCTURING {}
+
+        const { name, age } = { name: "Don", age: 20 };
+
+        // | equivalent to:
+
+        const name = "Don";
+        const age = 20;
+    </code>
+</pre>
+        Usually you are free to determine what the variable (you assign extracted values to) name should be when
+        destructuring. However, if you use it in routes where values are specified with pathvariables, then:
+<pre>
+    <code>
+        app.get("/api/bird/:id", (req, res) => {
+            const id = req.params.id; 
+                    <=>
+            const { id } = req.params;
+        }); 
+
+
+        app.get("/api/birds/diet/:diet", (req, res) => {
+            const { diet } = req.params;
+            const birdDiet = birds.findByDiet(diet);
+            res.send({ data : birdDiet });
+        });
+    </code>
+</pre>   
+        The { diet } variable cannot be named e.g. { food } because the parameter name (pathvariable) in the route is 
+        specifically defined as `:diet`. When you extract the parameter from req.params using "const { diet } = req.params",
+        you use the name "diet" to refer to the parameter.<br><br>
+        
+        But if you want to extract all properties of an object into a new object, it is valid to define a "random" name (as
+        long as it is not the same name as one of the properties) to the variable, when using destructuring syntax with the 
+        spread operator (...):
+<pre>
+    <code>
+        app.post("/api/birds", (req, res) => {
+            const { ...bird } = req.body;
+            const birdToSave = birds.createBird(bird);
+            res.send({ data : birdToSave });
+        });
+    </code>
+</pre>
+        In the example a new object called "bird" is created, containing all the porperties of the req.body object. 
+    </div>
+    </h6>
+</div>

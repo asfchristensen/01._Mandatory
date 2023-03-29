@@ -1,0 +1,151 @@
+<div class="col-3 mt-5">
+    <div class="buttons-header">
+        <h3>Subjects</h3>
+    </div>
+    <div class="sidebar">
+        <a href="#declaration-keywords"><button class="subject">Declaration keywords</button></a>
+        <a href="#const"><button class="sub-subject">const</button></a>
+        <a href="#let"><button class="sub-subject">let</button></a>
+        <a href="#var"><button class="sub-subject">var</button></a>
+        <a href="#global"><button class="subject">Global variables</button></a>
+    </div>
+</div>
+
+<div class="col-8 mt-5">
+    <h1>Variables</h1><br><br>
+
+    <h6>
+        Variables are containers for storing values. There exist two types: <span class="emphasis">local variables</span>
+        (inside functions with local scopes) and <span class="emphasis">global variables</span> (outside functions with 
+        global scopes). There are some rules while declaring a JavaScript variable (known as identifiers/name): it must 
+        start with a letter (a/A-z/Z), underscore(_) or dollar sign($).<br><br><br>
+
+        <h3 id="declaration-keywords">Declaration keywords</h3><br>
+        Dependening on the keyword, there are different scopes.<br>
+        You can declare variables in JavaScript in four ways:<br><br>
+
+        <p>
+            1) const<br>
+            2) let<br>
+            3) var<br>
+            4) Nothing
+        </p><br>
+
+        <h5 id="const">const</h5><br>
+        <p>
+            - Not a constant!<br>
+            - Always use it if you can get away with it<br>
+            - Has to be declared in the declaration line<br>
+            - Block scoped (can't be accessed from outside the block)<br>
+            - Must assign a value when declaring with const<br>
+        </p>
+<pre>
+    <code>
+        const me = { name: "Name" };
+    </code>
+</pre>
+        <p>
+            - Possible to assign a property to the object<br>
+        </p>
+<pre>
+    <code>
+        const hobbies = ["Hobby1", "Hobby2"];
+        hobbies.push("Hobby3");
+        me.hobbies = hobbies;
+    </code>
+</pre>
+        <p>
+            - Cannot be reassigned / change value after initialization<br> 
+        </p>
+<pre>
+    <code>
+        const me = { age: 30 };
+        me = { }; // not allowed!
+    </code>
+</pre>
+        <p>
+            - Cannot be re-declared<br>
+        </p>
+<pre>
+    <code>
+        const car = "Volvo";
+        const car; // not allowed!
+    </code>
+</pre>
+
+    <h5 id="let">let</h5><br>
+    <p>
+        - Use it when you need it<br>
+        - Use it if the value is going to change e.g. scores<br>
+        - Block scoped (can't be accessed from outside the block)<br>
+    </p>
+<pre>
+    <code>
+        let value = true;
+        {
+        let value = false;
+        }
+        console.log(value); // true
+    </code>
+</pre>
+<pre>
+    <code>
+        for (let i = 0; i <= 5; i++) {
+            setTimeout( () => {
+                console.log(i); <span id="console-print">// 0,1,2,3,4</span>
+            }, 1000);
+        }
+    </code>
+</pre>
+    <p>
+        - Cannot be re-declared<br>
+    </p>
+<pre>
+    <code>
+        let car = "Volvo";
+        let car; // not allowed! 
+    </code>
+</pre> 
+
+    <h5 id="var">var</h5><br>
+    <p>
+        - Never use this!!!<br>
+        - No scope (can be accessed from everywhere)<br>
+    </p><br>
+
+
+    <h3 id="global">Global variables</h3><br>
+    <div class="box-info">
+        Be careful when using global variables. <span class="emphasis">First</span> of all, if you declare 
+        a global variabel and accidently re-declare it, the first variable will be overwritten. 
+        <span class="emphasis">Secondly</span>, global variables take longer for JavaScript to find than local 
+        ones. Eventhough the speed difference isn't huge, it still exists. <span class="emphasis">Thirdly</span>
+        it can cause maintenance difficulties due to increased coupling that reduces testability in the code.<br>  
+<pre>
+    <code>
+        "use strict";
+
+        totalGlobalVariable = "Never ever do this";
+        var globalVariable = "Also never do this";
+
+
+        var value = true;
+        {
+            var value = false;
+        }
+        console.log(value); // false
+
+
+        for (var i = 0; i <= 5; i++) {
+            setTimeout( () => {
+                console.log(i); // 6,6,6,6,6,6
+            }, 1000);
+        } 
+    </code>
+</pre><br>
+        The 'i' is global do to 'var' and therefor 'i' points at the global 'i' that after
+        1 second already incremented to 6, and prints it out 6 times.  
+    </div>
+    </h6>
+</div>
+

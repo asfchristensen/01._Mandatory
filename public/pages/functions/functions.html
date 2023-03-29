@@ -1,0 +1,224 @@
+<div class="col-3 mt-5">
+    <div class="buttons-header">
+        <h3>Subjects</h3>
+    </div>
+    <div class="sidebar">
+        <a href="#declaration"><button class="subject">Declaration/syntax</button></a>
+        <a href="#notations"><button class="subject">Notations</button></a>
+        <a href="#invokation"><button class="subject">Invokation</button></a>
+        <a href="#ways-of-declaration"><button class="subject">Different ways of function declaration</button></a>
+        <a href="#expression"><button class="sub-subject">Expression</button></a>
+        <a href="#anonymous"><button class="sub-subject">Anonymous</button></a>
+        <a href="#arrow"><button class="sub-subject">Arrow</button></a>
+        <a href="#hoisting"><button class="sub-subject">Hoisting</button></a>
+        <a href="#self"><button class="sub-subject">Self-invoking</button></a>
+        <a href="#callback"><button class="subject">Callback functions</button></a>
+        <a href="#reference"><button class="subject">function()/function</button></a>
+        <a href="#why-use-functions"><button class="subject">Why use functions?</button></a>
+    </div>
+</div>
+
+<div class="col-8 mt-5">
+    <h1>Functions</h1><br><br>
+
+    <h6>
+        A function is a block of code that performs a particular task. It is executed when something invokes it.
+        If you use the <i>typeof</i> operator on functions, it will return "function". But functions are in fact
+        <span class="emphasis">first-class citizens</span> because they can be passed to other functions,
+        returned from functions and be assigned to variables and properties. They can also have properties e.g.
+        function.toString() and methods just like any other object.<br><br><br>
+
+        <h3 id="declaration">Declaration/syntax</h3><br>
+        The function is defined by the keyword <i>function</i> followed by a <i>name</i> (either letters,
+        digits, underscores og dollar sign) and parenthesis ( ) that can include <i>parameters</i>.
+        The code to be executed is inside the curly brackets { }.<br>
+<pre>
+    <code>
+        function random(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) - min);
+        }
+    </code>
+</pre>
+
+    <h3 id="notations">Notations</h3><br>
+        <h5>{ }</h5><br>
+        Inside these exists the function body. If you explicitly want to use <i>return</i> you have to have
+        { }. It's also used, when you have multiple statements inside the function.<br><br>
+        <h5>( )</h5><br>
+        An operator that invokes the function. If accessing the function without () it will return the
+        function object instead of the function result.
+<pre>
+    <code>
+        function findEvenOrOdd(number) {
+            if (number % 2 == 0) {
+                return "Number is even";
+            } else {
+                return "Number is odd";
+            }
+        }
+
+        const numberResult = findEvenOrOdd(10);
+        console.log(numberResult); // Number is even
+    </code>    
+</pre>
+        <h3 id="invokation">Invokation</h3><br>
+        <p>
+            - An event occurs (user clicks a button)<br>
+            - Call from JavaScript code e.g. <i>random()</i><br>
+            - Automatically (self invoked)
+        </p><br>
+
+        <h3 id="ways-of-declaration">Different ways a function can be declared</h3><br>
+        <h5 id="expression">Function Expression</h5><br>
+        Also known as assigning the function to a variable. The function is then invoked by calling the variable
+        name. When a function is assigned to a variable it then becomes a single statement and has to have ";" after
+        the last "}". The function assigned to a variable can either have a name or be anonymous. Following is a 
+        <i>named function</i><br><br>
+<pre>
+    <code>
+        const sayHello = function greeting(name) {
+            console.log(`Hello ${name}`); // Hello you
+        };
+
+        sayHello("you");
+    </code>
+</pre>
+        <h5 id="anonymous">Anonymous Functions</h5><br><br>
+        The function doesn't have a name and are hidden in the declaration itself, assigned to a variable. This
+        function is declared using only the function
+        keyword and a parenthesis, with or without parameters. When a function is assigned to a variable it then
+        becomes a single statement and has to have ";" after the last "}".<br><br>
+<pre>
+    <code>
+        const randomAnonymousFunction = function(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) - min);
+        };
+
+        console.log(randomAnonymousFunction(1,9));   
+    </code>
+</pre>
+        <h5 id="arrow">Arrow Functions</h5><br>
+        A short syntax for writing function expressions. Here you don't need the function keyword. It always
+        creates an anonymous function. The arrow <i>=></i> indicates a return
+        if there are no more than one statement, no return keyword or no curly brackets { }.<br><br>
+<pre>
+    <code>
+    const randomArrowFunctionCompact = (min, max) => Math.floor(Math.random() * (max-min+1) - min);
+
+    const theSameRandomArrowFunction = (min, max) => {
+        return Math.floor(Math.random() * (max - min + 1) - min);
+    }  
+    </code>
+</pre>
+        Arrow functions in JavaScript do not have their own 'this' binding which is why, you can't use arrow
+        functions inside an object to create a method. It will output undefined.<br><br>
+<pre>
+    <code>
+        const object = {
+            name: 'Don Joe',
+            quote: () => {
+                console.log(`${name} is always awesome`);
+            }
+        };
+        object.quote(); // "undefined is always awesome"
+    </code>
+</pre>
+        <h5 id="hoisting">Hoisting</h5><br>
+        Hoisting is JavaScripts default behaviour of moving declarations to the top of the current scope before
+        the code is executed. This is why, functions in JavaScript can be called before they are even declared.
+        It can be applied to variable declarations and function declarations.<br>
+        OBS: it only works with the function keyword and not the arrow function.<br>
+<pre>
+    <code>
+        console.log(test(2)); // 4
+
+        function test(number) {
+            return number * number;
+        }
+    </code>
+</pre>
+        <h5 id="self">Self-invoking Functions</h5><br>
+        This type of function automatically gets invoked without being called. It is wrapped in parentheses to
+        indicate that it is a function expression. The following code is an anonymous function.<br>
+<pre>
+    <code>
+        (function () {
+            const x = "I invoke myself";
+        })();
+    </code>
+</pre>
+        <h3 id="callback">Callback functions</h3><br>
+        A function that is passed as an argument is called a callback function. This is possible do to the
+        fact that functions are first-class citizens. When a function takes another function as a parameter it is called 
+        a <span class="emphasis">higher order function</span>. You can use the information on the left side to see, how many 
+        ways a function can be written especially when using the arrow function. The following example is a generic function 
+        with a standardized behaviour that calls a behaviour you need, based on the callback function <i>genericAction</i>
+<pre>
+    <code>
+        function genericActionPerformer(genericAction, genericName) {
+            return genericAction(genericName);
+        }
+
+
+        // 1. syntax example
+        const substract = (name) => `${name} substracts`;
+
+        console.log(genericActionPerformer(subtract, "Don")); 
+        // Don subtracts
+
+
+        // 2. syntax example
+        const walk = (name) => `${name} walks`;
+
+        console.log(genericActionPerformer(walk, "Don")); 
+        // Don walks
+
+
+        // 3. syntax example
+
+        console.log(genericActionPerformer((name) => `${name} reads`, "Don"));
+        // Don reads
+    </code>
+</pre>
+            <h3 id="reference">function() & function</h3><br>
+            <span class="emphasis">function()</span><br> 
+            Is a function call. It is used to invoke a function and execute the code inside the function. When calling a 
+            function you can pass arguments within the parentheses.<br><br>
+
+            <span class="emphasis">function</span><br> 
+            Is a function reference. This means you refer to the function by its name without calling it. This allows you 
+            to pass a function as a parameter (first class citizen) to another function, as the example with getNewQuest():<br>
+<pre>
+    <code>
+        function fetchQuest(activityQueryString="") {
+            fetch("https://www.boredapi.com/api/activity" + activityQueryString)
+            .then(response => response.json())
+            .then(result => {        
+                const insertActivity = document.getElementById('quest');
+                insertActivity.innerText = result.activity;
+            });
+        }
+        fetchQuest(); // should still show a 'starter' quest to begin with
+
+
+        function getNewQuest() {
+            const dropdown = document.getElementById('activity-dropdown');
+            fetchQuest(`?type=${dropdown.value}`);
+        }
+
+        // function reference
+        document.getElementById("fecth-new-quest-btn").addEventListener("click", getNewQuest);
+    </code>
+</pre>  
+
+    <h3 id="why-use-functions">Why use functions?</h3><br>
+    <div class="box-info">
+        <p>
+            - It encapsulates code<br>
+            - It can be reused multiple times<br>
+            - Makes the code readable, organized and maintainable<br>
+            - Help us obeying the DRY principle when writing code
+        </p>
+    </div>
+    </h6>
+</div>

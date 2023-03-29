@@ -1,0 +1,16 @@
+/* -------------- GENERICS -------------- */
+
+.front-header {
+    display: flex;
+    flex-direction: row;
+}
+
+
+/* -------------- IMAGES -------------- */
+
+#logo {
+    display: flex;
+    justify-content: center;
+    max-width: 30em;
+    padding-left: 15em;
+}

@@ -1,0 +1,212 @@
+/* -------------- GENERICS -------------- */
+
+html, body {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(243, 225, 192);
+}
+
+header {
+    padding-top: 2em;
+    background-color: rgb(243, 225, 192);
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.buttons-header {
+    padding-bottom: 2em;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    border-right: solid;
+    border-top: solid;
+    border-color: darkslategray;
+    position: fixed;
+    padding: 1em;
+    overflow-y: scroll;
+    top: 15em;
+    bottom: 0;
+}
+
+
+.subject {
+    background-color: rgb(243, 225, 192);
+    color: black;
+    padding: 1em 1em;
+    text-align: center;
+    text-decoration: none;
+    width: 15em;
+    margin-bottom: 1em;
+    cursor: pointer;
+    border: 0.2em solid;
+    border-color: darkslategray;
+}
+
+.subject:hover {
+    background-color: darkslategray;
+    color: white;
+}
+
+.subjects a {
+    border-right: 1em;
+}
+
+.sub-subject {
+    background-color: rgb(243, 225, 192);
+    color: black;
+    padding: 0.5em 0.5em;
+    text-align: center;
+    text-decoration: none;
+    width: 12em;
+    margin-bottom: 1em;
+    cursor: pointer;
+    border: 0.2em solid;
+    border-color: rgb(208, 169, 63);
+    margin-left: 1.5em;
+}
+
+.sub-subject:hover {
+    background-color: rgb(208, 169, 63);
+    color: white;
+}
+
+main {
+    background-color: rgb(243, 225, 192);
+    font-family:'Courier New', Courier, monospace;
+}
+
+.box-info {
+    padding: 1em;
+    height: auto;
+    border: 0.2em solid;
+    border-color: white;
+}
+
+
+
+/* -------------- TEXT -------------- */
+
+h1 {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bold;
+}
+
+h3 {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+h5 {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: rgb(208, 169, 63);
+}
+
+p {
+    margin-left: 3em;
+}
+
+.emphasis {
+    color: rgb(237, 120, 52);
+    font-weight: bold;
+}
+
+
+
+/* -------------- NAVBAR -------------- */
+
+.topnav {
+    background-color: darkslategray;
+    height: 3.5em;
+}
+
+.topnav a {
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    padding: 1em;
+    font-size: 1em;
+    text-decoration: none;
+}
+
+#left {
+    float: left;
+}
+
+#right {
+    float: right;
+}
+
+.topnav a:hover {
+    background-color: rgb(95, 154, 154);;
+    color: white;
+}
+
+.topnav a.active {
+    color: rgb(95, 154, 154);
+}
+
+.dropdown {
+    float: left;
+}
+  
+.dropdown .dropbtn {
+    font-size: 1em;
+    border: none;
+    outline: none;
+    color: white;
+    font-weight: bold;
+    padding: 1em;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+.topnav a:hover, .dropdown:hover .dropbtn {
+    background-color: rgb(95, 154, 154);
+    color: white;
+    font-weight: bold;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: darkslategray;
+    min-width: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    color: white;
+    padding: 1em;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+
+.dropdown-content a:hover {
+    background-color: rgb(95, 154, 154);
+    color: white;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+#login_button {
+    display: flex;
+    flex-direction: end;
+}
+
+
+/* -------------- FOOTER -------------- */
+
+#footer {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    padding-top: 5em;
+    background-color: rgb(243, 225, 192);  
+}
