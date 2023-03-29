@@ -3,12 +3,275 @@
         <h3>Subjects</h3>
     </div>
     <div class="sidebar">
-        <a href="#"><button class="subject"></button></a>
-        <a href="#"><button class="subject"></button></a>
-        <a href="#"><button class="subject"></button></a>
+        <a href="#loops"><button class="subject">Loops</button></a>
+        <a href="#methods"><button class="subject">Methods</button></a>
+        <a href="#why"><button class="subject">Why a functional approach?</button></a>
+        <a href="#quiz"><button class="subject">Quiz</button></a>
+        <a href="#smell"><button class="subject">Code smell</button></a>
+        <a href="#no-side-effects"><button class="subject">Implement loops without side effects</button></a>
+        <a href="#choose-method"><button class="subject">How to choose the right method?</button></a>
     </div>
 </div>
 
 <div class="col-8 mt-5">
-    <h1></h1>
-</div><br>
+    <h1>Loop methods</h1><br><br>
+
+    <h6>
+        <h3 id="loops">Loops</h3><br>
+        Used to iterate over an array or other iterable objects. There are different kinds of loops that loops
+        through:<br><br>
+        <p>
+            - <span class="emphasis">for</span> (block of code a number of times)<br>
+            - <span class="emphasis">for in</span> (properties of an object)<br>
+            - <span class="emphasis">for of</span> (values of an iterable object)<br>
+            - <span class="emphasis">while</span> (block of code as long as condition is true)
+        </p>
+        If the index order matters, then don't use <i>for in</i> loop, because you don't know in which order the
+        values are accessed. In this case, it is better to use a <i>for</i> or <i>for of</i> loop.<br><br><br>
+
+        <h3 id="methods">Methods</h3><br>
+        When you want to find the id or something else in an array/collection, then you should use loop methods
+        and NOT for-loops and while-loops.<br><br>
+
+        <h5>.map()</h5><br>
+        It applies a transformation function (once) to each element in an iterable and transform them into a new
+        iterable e.g. converting the elements from one datatype to another etc. It returns a new array with the exact 
+        same length as the original, which means it does not change the original array. It does not execute functions 
+        on empty elements.<br><br>
+
+        <h5>.filter()</h5><br>
+        It makes a superficial and shorter copy of a "portion" of the original array containing fewer elements
+        that live up to the condition with a true or false result. It doesn't change the origianl array, and it 
+        doesn't execute functions on empty elements. <strong>OBS:</strong> you should not use this method with large 
+        data sets - it won't be wrong to use it, but it will decrease performance/effeciency because you have to loop 
+        through each element in the collection.<br><br>
+
+        <h5>.find()</h5><br>
+        Returns the value of the first element it finds that passes the "test" of the function, which it
+        executes for each element in the array/collection. If it doesn't find any elements that passes, then it returns 
+        <i>undefined</i>. It doesn't change the original array, and it doesn't execute functions on empty elements.<br><br>
+
+        <h5>.findIndex()</h5><br>
+        Used to search an array and find the index of the first element that satisfies a specified condition. It takes a 
+        callback function as an argument and applies that function to each element of the collection. Once the element is 
+        found it returns the index of the array. If no element satisfies the condition it returns -1. This method gives 
+        instant access, and increases performance instead of using .find() or .filter() or .indexOf().<br><br>
+
+        <h5>.forEach()</h5><br>
+        <div class="box-info">
+            This is not a loop method, but an array method. It loops through any array/collection, executing a
+            provided function
+            once for each element in ascending index order. Should be used for DOM-manipulation in the frontend
+            HTML, and only when
+            "finger counting" is needed. The method doesn't care about the result. All it does is looping
+            through the data.
+        </div><br><br><br>
+
+        <h3 id="why">Why is a functional approach to loops to be preferred?</h3><br>
+        Because it makes the code:<br><br>
+        <p>
+            - Easier to understand<br>
+            - Less exposed for side effects<br>
+            - Avoid explicit loops<br>
+            - More concisely (fewer lines of code)<br>
+            - More clear<br>
+            - More clean
+        </p><br><br>
+
+        <h3 id="quiz">Tiny quiz - can you get the method right?</h3><br>
+        <table class="table table-borderless table-sm">
+            <tr>
+                <td style="width: 21em;">console.log each element?</td>
+                <td style="width: 5em;"><input id="1" type="text"></td>
+                <td style="width: 5em;"><button onclick="findMethod(event)">Check</button> =</td>
+                <td style="width: 3em;"><span id="result1"></span></td>
+            </tr>
+            <tr>
+                <td style="width: 21em;">change a property for every item?</td>
+                <td style="width: 5em;"><input id="2" type="text"></td>
+                <td><button onclick="findMethod(event)">Check</button> =</td>
+                <td><span id="result2"></span></td>
+            </tr>
+            <tr>
+                <td style="width: 21em;">find items that cost 1 dollar? </td>
+                <td style="width: 5em;"><input id="3" type="text"></td>
+                <td><button onclick="findMethod(event)">Check</button> =</td>
+                <td><span id="result3"></span></td>
+            </tr>
+            <tr>
+                <td style="width: 21em;">find an item with the color 'red'? </td>
+                <td style="width: 5em;"><input id="4" type="text"></td>
+                <td><button onclick="findMethod(event)">Check</button> =</td>
+                <td><span id="result4"></span></td>
+            </tr>
+            <tr>
+                <td style="width: 21em;">add new property to every element?</td>
+                <td style="width: 5em;"><input id="5" type="text"></td>
+                <td><button onclick="findMethod(event)">Check</button> =</td>
+                <td><span id="result5"></span></td>
+            </tr>
+            <tr>
+                <td style="width: 21em;">get all elements with length < 3? </td>
+                <td style="width: 5em;"><input id="6" type="text"></td>
+                <td><button onclick="findMethod(event)">Check</button> =</td>
+                <td><span id="result6"></span></td>
+            </tr>
+        </table><br><br>
+  
+    <h3 id="smell">Code smell</h3><br>
+    <div class="box-info">
+        Any characteristic in the source code that possibly indicates a deeper problem. But code smells are
+        not necessarily a problem.
+        They are signs that something might be wrong with the code. Things that could trigger code smell,
+        and thereby make the code less
+        readable and maintainable, could be:<br>
+        <p> 
+            - Too many indentation levels<br>
+            - Long functions<br>
+            - Too many parameters<br>
+            - Complex code<br>
+            - Copy/pasted code<br>
+            - Wrong use of equality<br>
+            - Comments and dead code<br>
+            - map() without encapsulation
+        </p>
+        
+    </div><br><br>
+
+    <h3 id="no-side-effects">How to implement loop methods without side effects?</h3><br>
+    <span class="emphasis">Side effects</span> makes the code more difficult to understand and test. It
+    could be: the use of while -and for-loops, because if something goes wrong and the loop somehow "breaks" then 
+    the function that depends on it will also break, or it could be nested map() methods that could result in 
+    performance issues, or it could be that you reuse a function in its original state after it has been mutated, 
+    because when you've made a new 'state' of a function then you should use that and never look back.
+    The following code shows how to minimize the side effects:<br><br>
+<pre>
+    <code>
+        const rocks = [
+            { name: "Pet rock", age: 2 },
+            { name: "Led Zeppelin", age: 55 },
+            { name: "Dwayne Johnson", age: 50 },
+        ];
+
+        // Make the rocks one year older
+
+        const rocksAgedOneYear = rocks.map(rock => {
+            rock.age++;
+            return rock;
+        });
+
+        /* Nothing is wrong with this code if you are sure, the array of 
+        objects "rocks" never are to be used again in its original state, 
+        because now it is mutated. So just to be sure, you should avoid 
+        any side effects and make a copy of the object by using { }:*/
+
+        const rocksAgedOneYear2 = rocks.map(rock => {
+            return { ...rock, age: rock.age + 1 };
+        });
+
+        /* Another solution could also be to wrap the object in ( ), 
+        because { } indicates that you are opening the function and ( ) 
+        indicates that it's not a function but JSON you are returning.*/
+
+        const rocksAgedOneYear = rocks.map(rock => (
+            {
+                name: rock.name,
+                age: rock.age + 1
+            }
+        ));
+
+        // Now console.log the rocks with even ages
+
+        const evenAgedRocks = rocks.filter(rock => rock.age % 2 === 0);
+        console.log(evenAgedRocks);
+
+        /* This would give a side effect if the rocksAgedOneYear was used,
+        because it's still adding ++ to the array. But this has been avoided
+        when using rocksAgedOneYear1 because that function made a new copy of
+        the object inside { }.*/   
+    </code>
+</pre>
+        <h3 id="choose-method">How to choose the right loop method?</h3><br>
+        This can be explained by the following code examples:<br><br>
+<pre>
+    <code>
+
+    // Array of spaceship objects
+
+    const spaceships = [
+        { id: 1, name: "Chinese Weather Balloon", isPriceless: false, cost: 100 },
+        { id: 2, name: "undefined", type: "UFO", isPriceless: true, cost: 1000 },
+        { id: 3, name: "Apollo 13", versionNumber: 13, isPriceless: false, cost: 2000 },
+    ];
+
+
+    // 1: console.log each spaceship object 
+
+    const printSpaceships = spaceships.forEach((spaceship) => console.log(spaceship));
+    console.log(printSpaceships);
+
+
+    // console.log the index position of each spaceship object
+
+    const printSpaceshipsIndex = spaceships.forEach((spaceship, index) => console.log(index));
+    console.log(printSpaceshipsIndex);
+
+
+    // 2: make the owner China for all spaceships
+
+    const spaceshipsWithOwners = spaceships.map(spaceship => {
+        spaceship.owner = "China";
+        return spaceship;
+    });
+
+
+    // the code above is not wrong, but to avoid side effects, we make a copy of the object instead
+
+    const spaceshipsWithOwners = spaceships.map(spaceship => {
+        return { ..spaceship, owner: "China" };
+    });
+
+
+    // 3: add a cost of isPriceless: true to all spaceshipsWithOwners
+
+    const spaceshipsWithPriceless = spaceshipsWithOwners.map(spaceship => {
+        spaceship.isPriceless = true;
+        return spaceship;
+    });
+
+
+    /* 4: console.log the priceless and not pricesless spaceships in two lists for this, you have to 
+    outcomment task 3 to avoid side effects if the two code snippets are in the same file */
+
+    const pricelessSpaceships = spaceships.filter(spaceship => spaceship.isPriceless === true);
+    const notPricelessSpaceships = spaceships.filter(spaceship => spaceship.isPriceless === false);
+
+    console.log(pricelessSpaceships);
+    console.log(notPricelessSpaceships);
+
+
+    // 5: find a spaceship that costs less than or equal to 1000 spacebuckets
+
+    const affordableSpaceship = spaceships.find(spaceship => spaceship.cost <= 1000);
+    console.log(affordableSpaceship);
+
+
+    /* 6: imagine the array of spaceships was over a thousand - delete a specific requested spaceship 
+    here it would make sense to use .find() but it would decrease performance, instead: */
+
+    function updateSpaceship(id) {
+        const foundIndex = spaceships.findIndex(spaceship => spaceship.id === Number(id));
+        if (foundIndex === -1) {
+            return `No spaceship found with id: ${id}`;
+        } else {
+            const deletedSpaceship = spaceships.splice(foundIndex, 1) [0];
+            return deletedSpaceship;
+         }
+    }
+    </code>
+</pre>
+    </h6>
+</div>
+
+<!---------------- SCRIPTS ---------------->
+<script src="/pages/loop_methods/loop_methods.js"></script>
