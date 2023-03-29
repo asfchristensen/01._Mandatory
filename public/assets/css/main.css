@@ -83,6 +83,14 @@ main {
     border-color: white;
 }
 
+.box-important {
+    padding: 1em;
+    height: auto;
+    border: 0.2em solid;
+    background-color: rgb(238, 133, 133);
+    border-color: red;
+}
+
 
 
 /* -------------- TEXT -------------- */
