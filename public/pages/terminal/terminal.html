@@ -3,12 +3,166 @@
         <h3>Subjects</h3>
     </div>
     <div class="sidebar">
-        <a href="#"><button class="subject"></button></a>
-        <a href="#"><button class="subject"></button></a>
-        <a href="#"><button class="subject"></button></a>
+        <a href="#why"><button class="subject">Why use the terminal?</button></a>
+        <a href="#git"><button class="subject">Git commands</button></a>
+        <a href="#clone"><button class="sub-subject">Clone project</button></a>
+        <a href="#commit-push"><button class="sub-subject">Commit & push</button></a>
+        <a href="#node"><button class="subject">Node commands</button></a>
+        <a href="#help"><button class="sub-subject">Helping command</button></a>
+        <a href="#install"><button class="sub-subject">Install packages</button></a>
+        <a href="#running"><button class="sub-subject">Running files</button></a>
+        <a href="#initialize"><button class="sub-subject">Initialize new project</button></a>
     </div>
 </div>
 
 <div class="col-8 mt-5">
-    <h1></h1>
-</div><br>
+    <h1>Terminal commands</h1><br><br>
+
+    <h6>
+        <h3 id="why">Why use the terminal in Node.js?</h3><br>
+        <p>
+            - It's more universal and not bound to an IDE<br>
+            - No GUI when working with servers e.g. intelliJ
+        </p><br>
+
+        <h3 id="git">Git commands</h3><br>
+        <h5 id="clone">Clone project from GitHub</h5><br>
+        <p>
+            - Create a repo on GitHub<br>
+            - Copy the URL<br>
+            - In the terminal navigate to the folder with "ls" and "cd" where you want to store the project<br>
+            - Clone the project in that folder
+        </p><br>
+
+        <div class="box-command">
+            <code>
+                user@user 4._semester % ls<br>
+                Python Node.js<br>
+                user@user 4._semester % cd Node.js<br>
+                user@user Node.js % <span id="command">git clone <i>https://github.com/annesofiefogh/Node.js_2023</i></span><br>
+                Cloning into 'Node.js_2023'...
+            </code>
+        </div><br><br>
+
+        <h5 id="commit-push">Commit and push code to GitHub</h5><br>
+        <p>
+            - Navigate to the working directory/folder<br>
+            - From here write three commmands<br>
+            - The first command can either be with '.' or "-A" ("all files in the directory")
+        </p><br>
+        <div class="box-command">
+            <code>
+                user@user Node.js_2023 % cd 06._Upper<br>
+                user@user 06._Upper % <span id="command">git add .</span><br>
+                user@user 06._Upper % <span id="command">git commit -m "Commit message here.."</span><br>
+                ...changes...<br>
+                user@user 06._Upper % <span id="command">git push</span>
+            </code>
+        </div>
+        </p><br><br>
+
+        <h3 id="node">Node commands</h3><br>
+        <h5 id="help">Helping command</h5><br>
+        <p>
+            - See the version of node running on your computer and see how to get help<br>
+            - Gets into a prompt '>' where you can write node commands<br>
+            - E.g. "typeof" command that shows the datatype you are working with<br>
+            - To exit the prompt, press 'Ctrl + C' (soft quit) or 'Ctrl + D' (hard quit)
+        </p><br>
+        <div class="box-command">
+            <code>
+                user@user Node.js_2023 % <span id="command">node</span><br>
+                Welcome to Node.js v18.14.0.<br>
+                Type ".help" for more information.<br>
+                ><br>
+                > <span id="command">typeof</span> 2 + "12"<br>
+                > "212"
+            </code>
+        </div><br><br>
+
+        <h5 id="install">Install packages</h5><br>
+        <p>
+            - When you want to use libraries in your node project you have to install packages<br>
+            - First install "node package manager" (npm) before any packages can be installed<br>
+            - When you run this command, it will automatically set up the "node_modules" directory (greyed out
+            because it's placed in .gitignore)<br>
+            - To make the <i>install"</i> you can either write "i" or "install"
+        </p><br>
+        <div class="box-command">
+            <code>
+                user@user 06._Upper % <span id="command">npm install</span><br>
+                ...installing the node package manager...
+            </code>
+        </div><br><br>
+        <p>
+            - When you want to install a specific package, after having created the package.json file in the root of
+            the project<br>
+            - Write "sudo" before it can install the packages (avoids the EACCES error)<br>
+            - The packagename could be "express" or "nodemon" etc.<br>
+            - Use the package across the entire application, add the flag "-g" (globally)
+        </p><br>
+        <div class="box-command">
+            <code>
+                user@user 06._Upper % <span id="command">sudo npm install <i>packagename</i></span><br>
+                ...installing a the package/library...
+            </code>
+        </div><br>
+        <div class="box-command">
+            <code>
+                user@user 06._Upper % <span id="command">sudo npm install nodemon -g</span><br>
+                ...installing nodemon so it can be run in every file in the aplication...
+            </code>
+        </div>
+        </p><br>
+
+        <h5 id="running">Running files with node</h5><br>
+        <p>
+            - If you want to test if your code works<br>
+            - Every time you make a change in your project, you have to type this command
+        </p><br>
+        <div class="box-command">
+            <code>
+                user@user 06._Upper % <span id="command">node "filename.js"</span><br>
+                ...code running...
+            </code>
+        </div><br><br>
+        <p>
+            - If you want to run the scripts automatically with automatic restart<br>
+            - To stop running nodemon, type: 'Ctrl + C'
+        </p><br>
+        <div class="box-command">
+            <code>
+                user@user 06._Upper % <span id="command">nodemon "filename.js"</span><br>
+                [nodemon] 2.0.21<br>
+                [nodemon] to restart at any time, enter `rs`<br>
+                [nodemon] watch path(s): *.*<br>
+                [nodemon] starting `filename.js`
+            </code>
+        </div><br><br>
+        <p>
+            - If used fs.readFileSync() in the application and written the nodemon.json file<br>
+            - This command ensures nodemon still updates files in the application dynamically<br>
+            - The filename.js is typically "app.js" with the routes<br><br>
+        <div id="update-with-sync" class="box-command">
+            <code>
+                user@user 06._Upper % <span id="command">nodemon --ext html,js filename.js</span><br>
+            </code>
+        </div>
+        </p><br>
+
+        <h5 id="initialize">Initialize a new Node.js project</h5><br>
+        <p>
+            - If you want to initialize a new Node.js project and thus also create your own "package.json" file
+            automatically<br>
+            - Add the flag "-y" to the command to avoid being prompted to answer a series of questions about the
+            project<br>
+            - If you want to deploy the project the packagename has to bee unique<br>
+            - To get the package into the project after this, write: npm i pacakgename.
+        </p><br>
+        <div class="box-command">
+            <code>
+                user@user 06._Upper % <span id="command">npm init -y</span><br>
+            </code>
+        </div>
+    </h6>
+</div>
