@@ -3,12 +3,222 @@
         <h3>Subjects</h3>
     </div>
     <div class="sidebar">
-        <a href="#"><button class="subject"></button></a>
-        <a href="#"><button class="subject"></button></a>
-        <a href="#"><button class="subject"></button></a>
+        <a href="#node-modules"><button class="subject">node_modules</button></a>
+        <a href="#managers"><button class="subject">Package managers</button></a>
+        <a href="#package-json"><button class="subject">package.json setup</button></a>
+        <a href="#express"><button class="subject">Express</button></a>
+        <a href="#escape"><button class="subject">Escape-html</button></a>
     </div>
 </div>
 
 <div class="col-8 mt-5">
-    <h1></h1>
-</div><br>
+    <h1>Packages</h1><br><br>
+
+    <h6>
+        A package is a set of modules that are organized in a structered way and can be installed, stored in   
+        <span class="emphasis">node_modules</span> folder and managed with the <span class="emphasis">npm</span>. 
+        It consists of a <span class="emphasis">package.json</span> file that includes metadata about the package 
+        (name, version, dependencies, scripts, code etc.) so basically everything that makes the package exactly 
+        <i>that</i> package. When the package is installed and stored in node_modules it comes with a <span class="emphasis">index.js</span>
+        file that serves as a main entry point for a package. This means that when you require/import a package from 
+        node_modules into the application code, Node.js looks for the index.js file in the package directory and loads 
+        it as the main module of the package. It can also be used to export other modules or functions from the package e.g.
+        "const app = package();" where the package gets the package function "package()" exported from its index.js file.<br><br>
+
+        <i>>> You know it's a package when it it's without ".js" <<</i><br><br>
+        
+        Packages are important for Node.js projects, because they provide a way for sharing and reusing code 
+        across different projects and teams. It's also time optimizing because you don't have to spend time 
+        "reinventing the wheel" but solely focus on building new features and functionality on top of existing code.
+        Following are some examples of packages we have been working on in this course.<br><br> 
+
+        <h3 id="node-modules">node_modules</h3><br>
+        A folder that contains/is a "cache" for all the dependencies (third-party packages and modules) required by the Node.js 
+        project. This folder is stored in the project and greyed out because it is in .gitignore. It's organized 
+        hierarchical as a tree structure, where each package is installed in its own subdirectory, along with its 
+        own dependencies, which makes it easy to manage and avoids conflict between different versions of the same 
+        package. It's created automatically when the "npm install" command is run. When you write "require("package")" 
+        (if using CommonJS modules) or "import "package" (if using ECAMScript modules) then Node.js will look for the 
+        package in the node_modules folder, and if it finds the package, it will load the module and make it available 
+        in the code. It's located in root of the project.<br><br>
+        Never push this (actively) to Git, because others are going to download it (and it's a big file) and can slow 
+        down performance. Furthermore everyone who downloads it will get that version of the packages and thereby not
+        the updated ones.<br><br>
+
+        <h3 id="managers">Package managers</h3><br>
+        The package managers manage the packages. A collection of software tools that automates the process by installing, 
+        updating, configuring and removing programs for an application.<br><br>
+        <h5>Maven</h5><br>
+        Manages dependencies and builds the process for Java projects. It downloads the dependencies 
+        needed (libraries or JAR files) for the application and stores them in a pom-xml file.<br><br> 
+        <h5>npm</h5><br>
+        "Node Package Manager". It is used to manage and share packages of code written in JavaScript.
+        It provides a vast repository of open-source packages that can be installed with the npm command 
+        (see <a href="/terminal">terminal</a>) and gets stored locally in the project's "node_modules" 
+        directory. Besides managing packages it also manages dependencies, running scripts and publishing
+        packages to the npm registry. It allows versioning of packages, which means you can specify the version
+        of af package the project should depend on, in the "package.json" file.<br><br>
+
+        <table class="table table-bordered table-warning">
+            <thead>
+                <tr class="table-success">
+                    <th style="width: 25em;">Maven</th>
+                    <th>npm</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>pom.xml</td>
+                    <td>package.json</td>
+                </tr>
+                <tr>
+                    <td>meta information</td>
+                    <td>meta information</td>
+                </tr>
+                <tr>
+                    <td>dependencies</td>
+                    <td>dependencies</td>
+                </tr>
+                <tr>
+                    <td>life cycles (pre-hooks, builds..)</td>
+                    <td>scripts</td>
+                </tr>
+            </tbody>
+        </table><br>
+            
+        <h5>Gradle, Ant, Homebrew</h5><br><br>
+
+        <h3 id="package-json">Set up package.json</h3><br>
+        <h5>Manually</h5><br>
+        When making a npm-project you should always have a package.json file. Setting it up manually:<br><br>
+        <p>
+            1) Create a new file i VSC called "package.json"<br>
+            2) Write the dependencies in JSON format
+        </p>
+<pre>
+    <code>
+        {
+            "dependencies": {
+                "express": "4.18.2"
+            }
+        }
+    </code>
+</pre>
+        <p>
+            3) Navigate to the correct folder in the terminal e.g. 06._Upper<br>
+            4) Write "sudo npm install express" to install the dependencies<br> 
+            5) The package gets stored automatically in node_modules folder<br>
+            *) To uninstall the package, write "sudo npm install express" again
+        </p><br>
+
+        <h5>Automatically</h5><br>
+        <p>
+            1) Write "npm init -y" command in the terminal in the project folder<br>
+            2) Answer the questions asked in the terminal<br>
+            3) A new package.json file has been created with default values for fields like:
+            name, version, description, author etc.<br>
+            4) No dependencies has been installed but a file structue has been created.<br>
+            5) Write "sudo npm install express" to install the dependencies<br>
+            6) The package gets stored automatically in node_modules folder<br>
+            *) To uninstall the package, write "sudo npm install express" again 
+        </p><br>
+
+        <h3 id="express">Express (third party library)</h3><br>
+        A web application framework (library) for Node.js that can be described as an extra layer on top of Node.js. It's installed 
+        with the command <span class="emphasis">"npm install"</span> and requires a minimum of setup and doesn't dictate how an API 
+        should be build (as is the case with Rails oe Django). Supports MVC architecture and has a set og features and tools that helps 
+        build web applications e.g. template engines, database integration (MySQL, MongoDB and PostgreSQL) and:<br><br> 
+        <p>
+            - Routing
+        </p><br>
+        Define routes that map to URLs and HTTP methods, so you can handle incoming requests and send responses. This is done 
+        by using the "app" object which is an instance of Express. When defining a route you specify the HTTP method and the 
+        path that the route should match e.g. a route that handles HTTP GET requests to the root URL ("/"):<br>
+<pre>
+    <code>
+        app.get("/", (req, res) => {
+            res.send("Response");
+        });
+    </code>
+</pre>
+        The second argument is a callback function that will be executed when a request is recieved that matches the method and path.<br><br>
+        <p>
+            - Middleware
+        </p><br>
+        These functions can be used to add functionality to a request or response process. They can perform "parsing" for requests
+        inspect incoming requests and modify the URL, security, authentication etc.<br>
+<pre>
+    <code>
+        app.use(express.static("public"));
+
+        app.use(express.urlencoded({ extended: true }));
+    </code>
+</pre> 
+        The ".static" middelware function is used to serve static files (HTML, CSS, JavaScript, img) from the public directory. Any 
+        requests that matches the file in the public directory will be served by Express without additional routing or logic.<br>
+        The ".urlencoded" middelware function is used to parse incoming request bodies in a URL-encoded format typically sent from 
+        HTML forms. It extracts the data from the request body and populates req.body property with an object containing key-value pairs 
+        of parsed data. "extended: true" is an option set to true to enable parsing of nested objects. 
+
+<pre>
+    <code>
+    HTML: 
+            < input type = "text" name="username" >
+            < input type = "text" name="password" >
+        
+    JS: 
+            app.post("/login", (req, res) => {
+                const uName = req.body.username;
+                const uPassword = req.body.password;
+            });
+    </code>
+</pre>
+
+        <p>
+            - RESTful APIs 
+        </p><br> 
+        Express is often used to build RESTful APIs and it includes: routes (represents ressources), HTTP methods (actions on ressources), 
+        middleware functions, response format (JSON) and error handling.<br><br><br>
+
+        <h3 id="escape">Escape-html (third-party library)</h3><br>
+        A module that provides a way to escape special characters in HTML code to prevent them from being executed as code. If the special 
+        characters are not escaped or sanitized, it can cause XSS attacks. Escape-html helps prevent this by converting special characters to
+        their equivalent HTML entities e.g. it converts "<" to "& lt;" and ">" to "& gt" etc.<br>
+<pre>
+    <code>
+    import escape from "escape-html";
+
+    async function renderJokePage() {
+        const path = "./public/pages/jokes/jokes.html";
+        let jokePage = readPage(path);
+        // getJoke() is a exported module from jokes.js file
+        const joke = await getJoke();
+
+        if (joke.joke) {
+            jokePage = jokePage.replace("$JOKE_HTML_CONTENT", `< h3 >${joke.joke}< /h3 >`)
+
+        } else if (joke.setup && joke.delivery) {
+            const jokeHtmlContent = `
+            < h3 >${escape(joke.setup)}< /h3 >
+            < h3 >${escape(joke.delivery)}< /h3 >
+            `;
+            jokePage = jokePage.replace("$JOKE_HTML_CONTENT", jokeHtmlContent)
+
+        } else {
+            jokePage = jokePage.replace("$JOKE_HTML_CONTENT", "< h3 >No jokes.< /h3 >")
+        }
+    </code>
+</pre>
+            Could be used in the routes as well when returning data to the client:
+<pre>
+    <code>
+    app.get("/user/:id", (req, res) => {
+        const { id } = req.params;
+        const user = users.find( user => user.id === id );
+        const escapedName = escape(user.name);
+        res.send(`< h1 >Welcome, ${ escapedName }!< /h1 >`);
+    });
+    </code>
+</pre>
+    </h6>
+</div>

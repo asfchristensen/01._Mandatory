@@ -1,0 +1,15 @@
+/* -------------- GENERICS -------------- */
+
+.box-command {
+    padding: 1em;
+    height: auto;
+    border: 0.2em solid;
+    border-color: black;
+}
+
+
+/* -------------- TEXT -------------- */
+
+#command {
+    color: rgb(74, 136, 72);
+}
