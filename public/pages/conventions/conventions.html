@@ -3,12 +3,103 @@
         <h3>Subjects</h3>
     </div>
     <div class="sidebar">
-        <a href="#"><button class="subject"></button></a>
-        <a href="#"><button class="subject"></button></a>
-        <a href="#"><button class="subject"></button></a>
+        <a href="#what"><button class="subject">What are conventions?</button></a>
+        <a href="#code-conventions"><button class="subject">Code conventions</button></a>
+        <a href="#clean"><button class="subject">Clean code</button></a>
+        <a href="#good-idea"><button class="subject">Why clean code & conventions are good</button></a>
+        <a href="#strict"><button class="subject">Strict mode</button></a>
+        <a href="#tools"><button class="subject">Tools to clean up code</button></a>
     </div>
 </div>
 
 <div class="col-8 mt-5">
-    <h1></h1>
-</div><br>
+    <h1>Conventions to follow</h1><br><br>
+
+    <h6>
+        <h3 id="what">What are conventions?</h3><br>
+        A set of agreed-upon standards or guidelines that are followed by developers. The 
+        conventions cover various aspects fo software development e.g. coding style, naming
+        conventions, file organization, documentation, testing and version control.<br><br><br>
+        
+        <h3 id="code-conventions">Code conventions</h3><br>
+        Having code conventions means that you have guidelines for a specific programming language that you must
+        follow while coding. It gives the application structure, consistency and a better overview.<br><br>
+        Examples of conventions in <span class="emphasis">JavaScript</span>:<br><br>
+        <p>
+            - Variable/function names should be written in camelCase<br>
+            - Constants should be written in CAPS, separated by "_"<br>
+            - Use double quotes (") for strings<br>
+            - Use strict equality (===) instead of soft (==)<br>
+            - Use semicolons (;) after statements 
+        </p><br>
+
+        And examples of conventions in <span class="emphasis">Node.js</span>:<br><br>
+        <p>
+            - Use ECMAScript module format instead of CommonJS<br>
+            - Use single quotes (') for strings<br>
+            - Use four spaces for identation<br>
+            - Always make a "app.js" file to hold the routes<br>
+        </p><br>
+
+        <h3 id="clean">Clean code</h3><br>
+        You basically write code for the "future you" and your co-workers. Not the machine.
+        It states that all code should be readable and understandable. That's why you should never use abbrevations for variables 
+        e.g. <i>footballTrainer</i> should not be named <i>ft</i> etc. It's better to use clear and readable variable names rather
+        than having a lot of comments in the code.<br><br><br>
+        
+        <h3 id="good-idea">Clean code and code conventions is a good idea, because:</h3><br>
+        <p>
+            - It's good for documentation<br>
+            - You don't need to know the code to know what it does<br>
+            - It makes the code more:
+        </p> 
+        <span><pre style="font-family:'Courier New', Courier, monospace">
+            - Readable
+            - Maintainable
+            - Reusable
+            - Trustworthy
+        </pre></span>
+        <p>
+            - It's easier to find bugs<br> 
+            - Others can read and understand the code and thereby decreasing the risk of errors<br>
+            - Waste of time not having conventions (you spent time figuring out the code!)
+        </p><br>
+
+    <h3 id="strict">Strict mode</h3><br>
+    <div class="box-info">
+        The <span class="emphasis">"use strict";</span> expression defines that the JavaScript code should be executed in a strict mode.
+        It has a global scope and will only be recognized at the top of the script og function:<br>
+<pre>
+    <code>
+        "use strict";
+
+
+        function printResult() {
+            const x = 10;
+            console.log(x); // 10
+        }
+
+        printResult();
+
+
+        y = 20;
+        console.log(y); // ReferenceError: y is not defined
+    </code>
+</pre>
+            This means that the code is now a stricter version of the language that provides additional safety checks and prevents certain
+            actions that could lead to bugs or security vulnerabilities e.g.:<br><br>
+            <p>
+                - Variables must be declared before they are used<br>
+                - Cannot assign a value to an undeclared function (prevents making global variabels by accident)<br>
+                - Duplicate property names in objects are not allowed<br>
+            </p><br>
+            A bad syntax is now being interpreted as errors, so the code should now be more "clean", realiable, predictable and secure. 
+    </div><br><br>
+
+    <h3 id="tools">Tools to clean up code</h3><br>
+    <div class="box-info">
+        Following tools are both used to improve the quality and consistency of code. They can be used together e.g. <a href="/tools">Prettier</a> can format
+        the code automatically, while <a href="/tools">ESLint</a> can enforce coding standards and identify portential issues.
+    </div>
+    </h6>
+</div>
