@@ -3,12 +3,201 @@
         <h3>Subjects</h3>
     </div>
     <div class="sidebar">
-        <a href="#"><button class="subject"></button></a>
-        <a href="#"><button class="subject"></button></a>
-        <a href="#"><button class="subject"></button></a>
+        <a href="#common"><button class="subject">CommonJS</button></a>
+        <a href="#ecma"><button class="subject">ECMAScript</button></a>
+        <a href="#export"><button class="subject">export vs. export default</button></a>
+        <a href="#js-modules"><button class="subject">Make JS to modules</button></a>
     </div>
 </div>
 
 <div class="col-8 mt-5">
-    <h1></h1>
-</div><br>
+    <h1>Import & Export</h1><br><br>
+
+    <h6>
+        Node.js has two different approaches to organize and share code:<br><br>
+        <p>
+            - CommonJS module<br>
+            - ECMASCript module
+        </p>
+        Both modules are used to organize and shar code in a project, but they have different syntax and behaviours.<br><br><br>
+
+        <h3 id="common">CommonJS - the old way of doing it</h3><br>
+        This module system loads synchronously, which means the modules can be used immediately after they are imported, and they are 
+        primarily used in a server-side environment. They have a vague scope.<br><br>
+
+        Syntax:<br>
+        <p>
+            - Importing modules use <span class="emphasis">require("module to import")</span><br>
+            - Exporting modules write <span class="emphasis">module.exports = {}</span>
+        </p>
+<pre>
+    <code>
+        // tanks.json 
+
+        {
+            "tanks": [
+                { "name": "Leopard", "nationality": "Germany" },
+                { "name": "Tiger", "nationality": "Germany", "year": 1943 }
+            ]
+        }
+
+        // tanks.js
+
+        const { tanks } = require("./tanks.json");
+
+        funtion getTanks() {
+            return tanks;
+        }
+
+        function addTank(tank) {
+            tanks.push(tank);
+            return tanks;
+        }
+
+        module.exports = {
+            getTanks,
+            addTank
+        }
+
+        // app.js
+
+        const tankUtil = require("./util/tanks.js");
+        console.log(tanksUtil.getTanks());
+
+        // or destructure it
+
+        const { getTanks, addTanks } = require("./util/tanks.js");
+        console.log(getTanks());
+    </code>
+</pre><br>
+
+        <h5>require()</h5><br>
+        Built-in function that is used to load modules into a Node.js application. It allows you to include code from other modules in
+        the application, and thereby break the application into smaller pieces. It takes the path to the module, you want to load, as the 
+        only argument. We have worked with two types of paths:<br><br>
+        <p>
+            1) Core modules
+        </p>
+<pre>
+    <code>
+        const fs = require("fs");
+    </code>
+</pre>          
+                <p>
+                    2) Local modules
+                </p>
+<pre>
+    <code>
+        const tanksUtil = require("./util/tanks.js");
+    </code>
+</pre><br>
+                When you require a module Node.js will first search for the module in the built-in modules, then in the <a href="packages/#node-module">node_modules</a>
+                and finally in the local directory. Once it finds the module it will load it and the return the "exports" object assigned to "module.exports".<br><br>
+
+                <h5>module.exports</h5><br>
+                An object in Node.js that is used to define what a module should export as its public API. Here you define the porperties and or methods you want to make 
+                available to other modules by setting them as properties of the "module.exports" object.<br><br><br> 
+
+        <h3 id="ecma">ECMAScript - the new way of doing it</h3><br>
+        This module system loads asynchronously, which means that the modules cannot be immeadiately available after import. They are
+        used both in server-side and client-side environments. They have a well-defined scope.<br><br>
+            
+        Syntax:<br>
+        <p>
+            - Write "type":"module" in the package.json file - when this is written in the package.json file above "main" you are indicationg that the package is an ECMAScript 
+            module, which makes it possible to use "import" and "export" statements to load and ecport modules instead of "require()" and "module.exports" as with CommonJS.<br>
+            - Importing modules use <span class="emphasis">import</span> keyword<br>  
+            - Exporting modules use <span class="emphasis">export</span> keyword  
+        </p>
+
+<pre>
+    <code>
+        // package.json 
+
+        ... 
+        "type":"module",
+        "main": "app.js",
+        ... 
+
+
+        // barracks.js 
+
+        export const guards = [
+            "Hank the tank",
+            "Thomas the tank engine",
+        ];
+
+        export function addGuard(guard) {
+            guards.push(guard);
+            return guards;
+        }
+
+        // or use default 
+
+        export default {
+            guards,
+            addGuard
+        };
+
+
+        // app.js
+
+        import { addGuard, guards } from "./barracks.js";
+        console.log(guards);
+    </code>
+</pre>
+        <div class="box-info">
+            OBS: If you want to import a .json file you have to add <span class="emphasis">assert{}</span> in the import statement:
+<pre>
+    <code>
+    import jokes from "./jokes.json" assert { type: "json" };
+    </code>
+</pre>
+            This is because "import" can't recognize "json" format.
+        </div><br><br><br> 
+
+        <h3 id="export">export vs. export default</h3><br>
+        <h5>export</h5><br>
+        For named exports! This keyword is used when you want to export a named function e.g.: 
+<pre>
+    <code>
+    // module.js 
+
+    export function greeting() {
+        console.log('Export me!');
+    }
+
+    // app.js
+
+    import { greeting } from "./module.js"; // import is with { }
+    greeting();
+    </code>
+</pre>
+
+        <h5>export default</h5><br>
+        For unnamed exports! This statement is also used to export expressions/functions et.c but you can only have 1 default export in each file! So if a module's primary 
+        purpose is to house one specific export, then it should be exported as a default export.<br>
+<pre>             
+    <code>
+    // module.js
+
+    export default function greeting() {
+        console.log('Export me by default!');
+    }
+
+    // app.js 
+
+    import greeting from "./module.js"; // import without { }
+    greeting();
+    </code>
+</pre><br>
+
+        <h3 id="js-modules">Make JS files to modules</h3><br>
+        <div class="box-important">
+            OBS: this is only important if you don't have the type property set in the package.json file! Because if you have set the property, then all .js
+            files are considered modules in the browser.<br><br>
+            If you haven't set the "type":"module" property in the package.json file, and want to use the "import" and "export" statements in .js file, you have to make it 
+            a module with the type attribute in html, see <a href="/html_design#type-attribute">< type="module" ></a>. 
+        </div>
+    </h6>
+</div>
