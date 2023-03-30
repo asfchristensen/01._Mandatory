@@ -17,6 +17,8 @@
 <div class="col-8 mt-5">
     <h1>REST API</h1><br><br>
 
+<!---------------------------------------------------------------------------------------------------------------------->
+
     <h6>
         <h3 id="what">What is a REST API?</h3><br>
         REST is an architectural style for building systems. It's a set of principles that define how web standards
@@ -31,12 +33,18 @@
         to identify ressources/endpoints. The response from a REST API are typically returned as JSON.<br><br>
         The REST API allows clients to interact with a web application by sending requests to then server and the recieve
         a response.<br><br><br>
-        
+
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h3 id="design">Design</h3><br>
         It is important to follow a set of conventions/best practices when creating and designing a REST API, e.g. 
         <span class="emphasis">1)</span> it uses a specific order of HTTP methods to represent actions, 
         <span class="emphasis">2)</span> it uses descriptive URIs (endpoints) with nouns (without extensions e.g. .json) to identify ressources e.g. /tasks, where the "/"
-        indicates a hierarchy. <u>IMPORTANT</u>: the nouns always have to be plural, because they are a collection of data that refers to a table in the database.
+        indicates a hierarchy.<br><br>
+        
+        <div class="box-important">
+            IMPORTANT</u>: the nouns always have to be plural, because they are a collection of data that refers to a table in the database.
+        </div><br>
         <span class="emphasis">3)</span> it uses HTTP status codes to represent success or failure.<br><br>
         We follow two conventions in this course: the order of HTTP-methods and nouns in plural for the URIs like this:<br><br><br>
         <table class="table table-bordered table-warning">
@@ -86,6 +94,8 @@
             </tbody>
         </table><br><br>
 
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h3 id="http">HTTP</h3><br>
         A stateless protocol used for communication (data transfer such as HTML pages, images and other files) 
         over the internet, especially used in REST APIs, that enables communication between clients 
@@ -93,7 +103,9 @@
         clicks a button and they include methods like GET, POST, PUT, PATCH and DELETE, 
         which are actions to be performed by the server. HTTP responses typically include status codes
         like 200 (OK), 404 (Not Found) and 500 (Internal Server Error), Content-types, Authorization etc.<br><br><br>
-       
+
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h5 id="send">How can the client send data? (requests)</h5><br>
         <p>
             1) Pathvariables (necessary to reach the endpoint)
@@ -118,22 +130,24 @@
     </code>
 </pre>
         Used to access the query parameters (here: ?adjective=spooky) that is a key-value pair.<br><br><br>    
-        
+
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h5 id="recieve">How can the client recieve data? (responses)</h5><br>
         We have learned that a client can recieve a response in four ways:<br><br>
         <p>    
-            1) res.sendFile(__dirname, "/path");
+            1) <span class="emphasis">res.sendFile(__dirname, "/path");</span>
         </p><br>
         Used to send static files. "path" defines the file to be served. "__dirname" specifies from which directory the 
-        file should be served. See <a href="/serve_html">Serving HTML</a><br><br> 
+        file should be served. See <a href="/serve_html#dirname">Serving HTML</a><br><br> 
         <p>
-            2) res.sendFile(path.resolve("path"));
+            2) <span class="emphasis">res.sendFile(path.resolve("path"));</span>
         </p><br>
         Used to send static files (the same as the line above). But this one uses path.resovle to handle "path"
         relatively to the current working directory. Usefull when you want to send files that are not in the same directory 
-        as the app.js file. See <a href="/serve_html">Serving HTML</a><br><br>   
+        as the app.js file. See <a href="/serve_html#path">Serving HTML</a><br><br>   
         <p>
-            3) res.send();
+            3) <span class="emphasis">res.send();</span>
         </p><br>
         Sends a string, object or array as a response to the client. Usefull when you want to send data dynamically e.g. 
         from a database or API to the client. The data gets send in  resposne body either as plain text or JSON.<br><br>
@@ -142,19 +156,23 @@
         When using the key <span class="emphasis">message</span> it indicates that you want to send an error message
         back to the client.<br><br> 
         <p>
-            4) res.redirect();
+            4) <span class="emphasis">res.redirect();</span>
         </p><br>
         Method used to navigate the client to another URL. When res.redirect() is called the server sends an HTTP response 
         to the client with the status code 302 (Found) and a location header containing the new URL. The client then 
         automatically sends a new request to the new URL specified in the location header, and the server responds with the 
-        content that matches the URL. See <a href="/rendering">SSR & CSR</a><br><br><br>
+        content that matches the URL. See <a href="/redirects#server">redirection</a><br><br><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
 
         <h3 id="pure">Pure API</h3><br>
         An application programming interface that provides a clear, consistent and predictable
         interface. The term "pure" emphasizes that the API is designed to be used for its
         intended purpose and does not include any unnecessary functionality like e.g. frontend.
         An example from this course would be the "BIRDS API".<br><br><br>
-        
+
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h3 id="how">HTTP-methods - how to do it in Express?</h3><br>
         In the package <a href="/packages#express">Express</a> there are methods like: <span class="emphasis">app.get() / .post() / .patch() / .delete()" and "app.post"</span> 
         etc. that allow you to define routes for HTTP GET, POST, PUT, PATCH and DELETE requests. The methods takes two arguments: 
@@ -210,6 +228,8 @@
 </pre>
         All the endpoints have an "/api/" included because it's common convention for endpoints that return data in a machine-readable format
         such as JSON - just data. If the endpoints returned a HTML page instead, then the "/api/" would not have been necessary.<br><br><br>  
+
+<!---------------------------------------------------------------------------------------------------------------------->
 
         <h3 id="json">JSON</h3><br>
         "JavaScript Object Notation". A standard/specification that is easy for machines to parse 

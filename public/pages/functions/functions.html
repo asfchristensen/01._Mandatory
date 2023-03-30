@@ -28,6 +28,8 @@
         returned from functions and be assigned to variables and properties. They can also have properties e.g.
         function.toString() and methods just like any other object.<br><br><br>
 
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h3 id="declaration">Declaration/syntax</h3><br>
         The function is defined by the keyword <i>function</i> followed by a <i>name</i> (either letters,
         digits, underscores og dollar sign) and parenthesis ( ) that can include <i>parameters</i>.
@@ -38,7 +40,9 @@
             return Math.floor(Math.random() * (max - min + 1) - min);
         }
     </code>
-</pre>
+</pre><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
 
     <h3 id="notations">Notations</h3><br>
         <h5>{ }</h5><br>
@@ -60,15 +64,23 @@
         const numberResult = findEvenOrOdd(10);
         console.log(numberResult); // Number is even
     </code>    
-</pre>
+</pre><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h3 id="invokation">Invokation</h3><br>
         <p>
             - An event occurs (user clicks a button)<br>
             - Call from JavaScript code e.g. <i>random()</i><br>
             - Automatically (self invoked)
-        </p><br>
+        </p><br><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
 
         <h3 id="ways-of-declaration">Different ways a function can be declared</h3><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h5 id="expression">Function Expression</h5><br>
         Also known as assigning the function to a variable. The function is then invoked by calling the variable
         name. When a function is assigned to a variable it then becomes a single statement and has to have ";" after
@@ -82,8 +94,11 @@
 
         sayHello("you");
     </code>
-</pre>
-        <h5 id="anonymous">Anonymous Functions</h5><br><br>
+</pre><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
+
+        <h5 id="anonymous">Anonymous Functions</h5><br>
         The function doesn't have a name and are hidden in the declaration itself, assigned to a variable. This
         function is declared using only the function
         keyword and a parenthesis, with or without parameters. When a function is assigned to a variable it then
@@ -96,7 +111,10 @@
 
         console.log(randomAnonymousFunction(1,9));   
     </code>
-</pre>
+</pre><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h5 id="arrow">Arrow Functions</h5><br>
         A short syntax for writing function expressions. Here you don't need the function keyword. It always
         creates an anonymous function. The arrow <i>=></i> indicates a return
@@ -122,12 +140,17 @@
         };
         object.quote(); // "undefined is always awesome"
     </code>
-</pre>
+</pre><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h5 id="hoisting">Hoisting</h5><br>
         Hoisting is JavaScripts default behaviour of moving declarations to the top of the current scope before
         the code is executed. This is why, functions in JavaScript can be called before they are even declared.
-        It can be applied to variable declarations and function declarations.<br>
-        OBS: it only works with the function keyword and not the arrow function.<br>
+        It can be applied to variable declarations and function declarations.<br><br>
+        <div class="box-important">
+            OBS: it only works with the "function" keyword and not the arrow function.
+        </div><br>
 <pre>
     <code>
         console.log(test(2)); // 4
@@ -136,7 +159,10 @@
             return number * number;
         }
     </code>
-</pre>
+</pre><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h5 id="self">Self-invoking Functions</h5><br>
         This type of function automatically gets invoked without being called. It is wrapped in parentheses to
         indicate that it is a function expression. The following code is an anonymous function.<br>
@@ -146,7 +172,10 @@
             const x = "I invoke myself";
         })();
     </code>
-</pre>
+</pre><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h3 id="callback">Callback functions</h3><br>
         A function that is passed as an argument is called a callback function. This is possible do to the
         fact that functions are first-class citizens. When a function takes another function as a parameter it is called 
@@ -179,14 +208,15 @@
         console.log(genericActionPerformer((name) => `${name} reads`, "Don"));
         // Don reads
     </code>
-</pre>
+</pre><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
+
             <h3 id="reference">function() & function</h3><br>
-            <span class="emphasis">function()</span><br> 
-            Is a function call. It is used to invoke a function and execute the code inside the function. When calling a 
+            <span class="emphasis">function()</span> is a function call. It is used to invoke a function and execute the code inside the function. When calling a 
             function you can pass arguments within the parentheses.<br><br>
 
-            <span class="emphasis">function</span><br> 
-            Is a function reference. This means you refer to the function by its name without calling it. This allows you 
+            <span class="emphasis">function</span> is a function reference. This means you refer to the function by its name without calling it. This allows you 
             to pass a function as a parameter (first class citizen) to another function, as the example with getNewQuest():<br>
 <pre>
     <code>
@@ -209,16 +239,16 @@
         // function reference
         document.getElementById("fecth-new-quest-btn").addEventListener("click", getNewQuest);
     </code>
-</pre>  
+</pre><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
 
     <h3 id="why-use-functions">Why use functions?</h3><br>
-    <div class="box-info">
-        <p>
-            - It encapsulates code<br>
-            - It can be reused multiple times<br>
-            - Makes the code readable, organized and maintainable<br>
-            - Help us obeying the DRY principle when writing code
-        </p>
-    </div>
+    <p>
+        - It encapsulates code<br>
+        - It can be reused multiple times<br>
+        - Makes the code readable, organized and maintainable<br>
+        - Help us obeying the DRY principle when writing code
+    </p>
     </h6>
 </div>

@@ -6,7 +6,7 @@
         <a href="#promise"><button class="subject">Promise</button></a>
         <a href="#then"><button class="subject">.then</button></a>
         <a href="#async-await"><button class="subject">async/await</button></a>
-        <a href="#response"><button class="subject">response.?</button></a>
+        <a href="#response"><button class="subject">Response format</button></a>
         <a href="#xss"><button class="subject">XSS danger</button></a>
         <a href="#sanitize"><button class="subject">Sanitize inputs with npm package</button></a>
     </div>
@@ -19,20 +19,24 @@
         "fetch" is a built-in method in web browsers that allows the client to make HTTP requests to a 
         server, retrieve data from it and recieve a response. The method returns a <span class="emphasis">promise</span> 
         object that resolves to the response object (the response from the server to the client).<br><br><br>
+        
+<!---------------------------------------------------------------------------------------------------------------------->
 
-    <h3 id="promise"> Promise</h3><br>
+        <h3 id="promise"> Promise</h3><br>
         <div class="box-info">
             An object that respresents the eventual completion (or failure) of an asynchronous operation.
             It provides a way to handle asynchronous code in a more readable and manageable way. When you 
             fetch data, the response is a promise object, which can have 3 states:<br><br>
             <p>
-                - Pending: initial state<br>
-                - Fulfilled: the operation successfully completed<br>
-                - Rejected: the operation fails
-            </p>
+                - <span class="emphasis">Pending</span>: initial state<br>
+                - <span class="emphasis">Fulfilled</span>: the operation successfully completed<br>
+                - <span class="emphasis">Rejected</span>: the operation fails
+            </p><br>
             To handle these states, the "promise" object uses ".then" (that registers a callback function to 
             be invoked) or "await" (allows to wait for a promise) - to be fulfilled or rejected. 
         </div><br><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
 
         <h3 id="then">.then</h3><br>
         This provides a global fetch() method that returns a promise that resolves to the response object.
@@ -79,6 +83,9 @@
         }
     </code>
 </pre><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h3 id="async-await">async/await</h3><br>
         These are keywords that are used to write asynchronous code in a more synchronous style. <span class="emphasis">async</span>
         declares that the function should be run asynchronous, which means that the rest of the application can 
@@ -95,48 +102,58 @@
             console.log(result.data);
         }
     </code>
-</pre><br>
+</pre>
         This type of fetch uses "await" to wait for the fetch request to complete and then return the response.
         The same keyword is used again to wait for the response to be parsed to a JavaScript object. All this is 
         done asynchronously because of the "async".<br><br><br>
 
-        <h3 id="response">response.?</h3><br>
+<!---------------------------------------------------------------------------------------------------------------------->
+
+        <h3 id="response">Response format</h3><br>
         <div class="box-info">
-            It's important to note that the "response." only works if the response method matches the data type that is 
-            being fetched.<br><br>
-    
+            <div class="box-important">
+                It's important to note that the "response." only works if the response method matches the data type that is 
+                being fetched.
+            </div><br><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
+
             <h5>.json()</h5><br>
             Only works if the endpoint/URL you are fetching from returns data in JSON format.<br>
-    <pre>
-        <code>
-            app.get("/api/tanks", (req, res) => {
-                res.send({ data: tanksUtil.getTanks() });
-            });
-    
-    
-            fetch("/api/tanks")
-            .then(response => response.json())
-            .then(result => console.log(result);
-        </code>
-    </pre>
-                In this particular example the the endpoint "/api/tanks" has a body as a ByteStream (given by TCP) which is why
-                it has to be converted to JSON.<br><br>
-    
-                <h5>.text()</h5><br>
-                Only works if the endpoint/URL you are fetching from returns data in text format.<br>
-    <pre>
-        <code>
-            app.get("/proxy", (req, res) => {
-                // task make a request to https://www.google.com
-                // task serve the text data
-                fetch("https://www.google.com")
-                .then(response => response.text())
-                .then(result => res.send(result));
-            });
-        </code>
-    </pre>
-        </div><br><br>
-        
+<pre>
+    <code>
+        app.get("/api/tanks", (req, res) => {
+            res.send({ data: tanksUtil.getTanks() });
+        });
+
+
+        fetch("/api/tanks")
+        .then(response => response.json())
+        .then(result => console.log(result);
+    </code>
+</pre>
+            In this particular example the the endpoint "/api/tanks" has a body as a ByteStream (given by TCP) which is why
+            it has to be converted to JSON.<br><br><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
+
+            <h5>.text()</h5><br>
+            Only works if the endpoint/URL you are fetching from returns data in text format.<br>
+<pre>
+    <code>
+        app.get("/proxy", (req, res) => {
+            // task make a request to https://www.google.com
+            // task serve the text data
+            fetch("https://www.google.com")
+            .then(response => response.text())
+            .then(result => res.send(result));
+        });
+    </code>
+</pre>
+        </div><br><br><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h3 id="xss">XSS danger</h3><br>
         'Cross-Site Scripting' is a type of security vulnerability that accours, when an attacker injects malicious
         code into a web application, which then executes in the browser of other users who visit the website. This can 
@@ -165,6 +182,8 @@
             Here the "tank.name" could have been a malicious script that would get implemented in the system. 
         </div><br><br>
 
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h5>Examples when XSS can happen</h5><br>
         <p>
             - Missing input validation (as the code above)<br><br>
@@ -175,17 +194,19 @@
             - Error setting Content-Type header<br>
             (can cause the browser not interpreting the data as HTML or JavaScript, but interprets the data a plain text, and 
             then the browser can accidently execute the data as code)   
-        </p><br>
+        </p><br><br>
 
-    <h3 id="sanitize">Sanitize the inputs with npm package</h3><br>
-    <div class="box-info">
-        When sanitizing inputs from an API or a client, you make sure the inputs can never be a script - it will always escape 
-        HTML. Here you can use a npm package called <a href="/packages#escape">escape-html</a> that lets you escape certain HTML 
-        characters. The package helps "sanitize" the code.<br><br>
-        
-        Besides "escape-html" package, there is another package called "xss" (which we haven't been working with in the class). This 
-        is also a third-party module that has to importet into the Node.js project. When using "xss" it sanitizes user input by 
-        removing potentially malicious HTML tags and attributes. This is in contrast to "escape-html" that escapes these characters instead.<br>
+<!---------------------------------------------------------------------------------------------------------------------->
+
+        <h3 id="sanitize">Sanitize inputs with npm package</h3><br>
+        <div class="box-info">
+            When sanitizing inputs from an API or a client, you make sure the inputs can never be a script - it will always escape 
+            HTML. Here you can use a npm package called <a href="/packages#escape">escape-html</a> that lets you escape certain HTML 
+            characters. The package helps "sanitize" the code.<br><br>
+            
+            Besides "escape-html" package, there is another package called "xss" (which we haven't been working with in the class). This 
+            is also a third-party module that has to be importet into the Node.js project. When using "xss" it sanitizes user input by 
+            removing potentially malicious HTML tags and attributes. This is in contrast to "escape-html" that escapes these characters instead.<br>
 <pre>
     <code>
         import xss from "xss";
@@ -198,6 +219,6 @@
 </pre>
             As the code example shows, the "xssSanitation" has removed the "onclick" attribute because of a potential risk. But the a-tag 
             has been kept, since this tag doesn't do any harm. 
-        </h6>
-    </div>
+        </div>
+    </h6>
 </div>

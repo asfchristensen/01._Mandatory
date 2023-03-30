@@ -19,9 +19,11 @@
     <h6>
         This page describes good code conventions for HTML code and how to make HTML dynamic components.<br><br><br>
 
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h3 id="component">Components</h3><br>
         When making SSR in the project, you have likely divided the HTML page into components and separated the navbar/header and footer 
-        from the body, making each of them components (see <a href="/app_setup#component">app.js setup</a>). When doing so, it's important to make the HTML-parts as reusable and dynamic as 
+        from the body, making each of them <a href="/app_setup#component">components</a>. When doing so, it's important to make the HTML-parts as reusable and dynamic as 
         possible, and therefor you have to use non-standardized HTML attributes/elements aka. <span class="emphasis">$PLACEHOLDERS</span>:<br><br>
 <pre>
     <code>
@@ -61,6 +63,8 @@
         $CSS_LINK, $TAB_TITLE and $FOOTER_YEAR are not valid HTML syntax, but in this case they act like placeholders/SSR references and are getting 
         replaced with dynamic content during the editing/rendering process.<br><br><br>
 
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h3 id="convention">Conventions</h3><br>
         When structuring the HTML, you have to follow a specific semantic, where you divide the HTML content into a header, main and footer, because it 
         will make the HTML-page more readable and natural:<br> 
@@ -77,7 +81,12 @@
     </code>
 </pre><br>
 
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h3 id="css">CSS styling</h3><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h5>tags</h5><br>
         There exists 3 options for styling selectors in the HTML-file:<br><br>
         <div class="box-important">
@@ -114,11 +123,15 @@
             BAD! You can't reuse the code in other documents
         </div><br><br>
 
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h5>values</h5><br>
         <p>
             - em
         </p>
         A relative value that fits all screensizes and resolutions, and should be used instead of the outdated "px".<br><br><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
 
         <h3 id="scoping">Scoping</h3><br>
         Always have <span class="emphasis">document.getElementById('#')</span> inside the scope:<br><br>
@@ -150,6 +163,8 @@
         Then it could be referenced by other functions too, besides this one in the script. Everything can access it. But by doing this you loose 
         scoping and thereby decrease readability, memory optimization and make it harder to maintain the code.<br><br><br>
 
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h5>Why is scoping good?</h5><br>
         <p>
             - Avoids name-conflicts<br>
@@ -161,7 +176,7 @@
             - Readability
         </p><br><br>
 
-<!--type module------------------------------------------------------------------------------------------------------->
+<!---------------------------------------------------------------------------------------------------------------------->
 
         <h3 id="type-attribute">< type="module" ></h3><br>
         <div class="box-important">
@@ -222,27 +237,29 @@
             You could also have written this instead of using the type="module" attribute:
 <pre>
     <code>
-    // museumGuards.html 
+        // museumGuards.html 
 
-    < body >
-        < h1 >Museum Guards< /h1 >
-    
-        < script src="./barracks.js" />
-        < script src="./guards.js" />
-    < /body >
+        < body >
+            < h1 >Museum Guards< /h1 >
+        
+            < script src="./barracks.js" />
+            < script src="./guards.js" />
+        < /body >
     </code>
 </pre>
             This would also make it possible to console.log the guards in the browser if the "barracks.js" is above the "guards.js" file due to to 
-            <span class="emphasis">dependency graph</span>. There is just one problem: with large projects that contains a lot of scripts, it's nearly impossible to 
+            <span class="emphasis-important">dependency graph</span>. There is just one problem: with large projects that contains a lot of scripts, it's nearly impossible to 
             maintain an overview of which script should be above another, which is why it's better to use the type="module" attribute and avoid that issue.   
         </div><br><br>
 
         <h3 id="graph">Dependency Graph</h3><br>
         <div class="box-info">
             This is used to represent the flow of information. Its main purpose is to help the compiler with checking the different types of dependencies 
-            between statements and to prevent them from being executed in the wrong order, which can have a great impact on the application. Just like 
-            the code example with the "barracks.js" and "guards.js" - if the order was reverse, the application won't work and can cause 
-            <span class="emphasis">memory bloat</span>.<br><br><br>
+            between statements and to prevent them from being executed in the wrong order, which can have a great impact on the application.<br><br>
+            <div class="box-important">
+                Just like the code example with the "barracks.js" and "guards.js" - if the order was reverse, the application won't work and can cause 
+                <span class="emphasis-important">memory bloat</span>.
+            </div>
         </div><br><br>
 
         <h3 id="bloat">Memory bloat</h3><br>

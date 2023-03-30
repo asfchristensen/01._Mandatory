@@ -17,6 +17,8 @@
         Redirection is a process of direction clients to a different web page or URL. There are two types of redirection: 
         client-side redirection and server-side redirection.<br><br><br>
 
+<!---------------------------------------------------------------------------------------------------------------------->
+
        <h3 id="client">Client-Side Redirection</h3><br>
        Occurs entirely on the user's browser, where the browser uses JavaScript to redirect the user to a new URL. The server is 
        not involved. The client handles the redirection. This form is fast and efficient because it doesn't require any communication
@@ -66,6 +68,8 @@
     </code>
 </pre><br>
 
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h3 id="server">Server-Side Redirection</h3><br>
         Performed by the server itself. When the server recieves a request for a URL, it checks to see if a redirection is necessary and 
         then sends the browser a response containing the new URL. This form is more secure, but also slower because it requires communication 
@@ -87,6 +91,8 @@
     </code>
 </pre><br>     
 
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h3 id="response">Responses</h3><br>
         (This is for server-side redirection only) When the browser recieves a response from the server, then it will automatically redirect 
         the user to the specified URL along with a status code that indicates that a ressource has been moved to a new location:<br><br>
@@ -103,6 +109,8 @@
 </pre>
         These status codes are part of the HTTP protocol.<br><br><br>
 
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h3 id="choose">Which redirection to choose?</h3><br>
         Always use server-side redirection because it is more safe. If you were to use client-side redirection, you should use:<br><br>
         <p>
@@ -110,6 +118,8 @@
             - Hyperlink with < a ><br>
             - HTML form with "action" attribute 
         </p><br>
-        Don't use the "< meta >" because it is exposed to attackers and used maliciously. 
+        <div class="box-important">
+            Don't use the "< meta >" because it is exposed to attackers and used maliciously.
+        </div> 
     </h6>
 </div>

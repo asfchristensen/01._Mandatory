@@ -13,9 +13,11 @@
 <div class="col-8 mt-5">
     <h1>app.js setup step-by-step</h1><br><br>
 
+<!---------------------------------------------------------------------------------------------------------------------->
+
     <h6>
-        <h3 id="folders">Folder structure</h3><br><br>
-        It's important to follow a specific structure when it comes to folders in your project.<br><br><br> 
+        <h3 id="folders">Folder structure</h3><br>
+        It's important to follow a specific structure when it comes to folders in your project.<br><br> 
 <pre>
     Project-name<br>
     <span><div class="folder"></div></span> public<br>
@@ -50,7 +52,7 @@
     <span class="file-js">JS</span> app.js<br>
     <span class="file-js">{}</span> nodemon.json<br>
     <span class="file-js">{}</span> package.json<br>
-</pre><br>
+</pre>
 
         Everything in <span class="emphasis">assets</span> folder is something that recurs on every html-page 
         throughout the project. That's why main.css targets main selectors (e.g. h1, body, components like navbar 
@@ -71,7 +73,7 @@
         < /html >
     </code>
 </pre>   
-    The html-page stored in navbar consits of everything from:<br><br>
+        The html-page stored in navbar consits of everything from:<br><br>
 <pre>
     <code>
         < !DOCTYPE html >
@@ -99,22 +101,29 @@
 
         The same goes for the <span class="emphasis">root files</span> (app.js, nodemon.json, package.json). These have to be at the root of the project, because:<br><br>
         <p>
-            app.js<br>
+            <span class="emphasis">app.js</span><br>
             Is the entry point for a Node.js application and it contains the code that initializes and starts the application. By convention, this file is located at the root of the project to make it easy to locate and execute.<br><br>
-            package.json<br>
+            <span class="emphasis">package.json</span><br>
             Defines various metadata about the project and includes scripts that can be executed via the npm command-line tool. Therefor it needs to be located at the root because npm looks for it in the project's root directory.<br><br>
-            nodemon.js<br>
+            <span class="emphasis">nodemon.js</span><br>
             This file is used to configre the nodemon tool, and needs to be located at the root of the project because nodemon looks for it in the project's root directory. 
         </p><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h5 id="component">What is a component?</h5><br>
         A reusable structure that can be used throughout the project on every page. It's templates/styling that the developer chooses, and some of the typical components are: navbar, footer and body. These components are stored in a folder 
         called "assets". By having this folder you try to remove al logic from app.js and "clean up" the HTML pages, so there won't be any duplicate code.<br><br><br>
         
+<!---------------------------------------------------------------------------------------------------------------------->
 
         <h3 id="install">Install the packages needed</h3><br>
         <p> 
             1) Create a package.json file and write the dependencies
         </p><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h5>Manually...</h5>
 <pre>
     <code>
@@ -125,6 +134,9 @@
         }
     </code>
 </pre>
+
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h5>Automatically...</h5><br>
         ... when creating a default package.json file without any dependencies installed:
 <pre>
@@ -146,6 +158,8 @@
         You know the package is installed if the "node_modules" folder has been added to the project.
         It will be greyed out because of being placed in .gitignore.<br><br><br>
 
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h3 id="instance">Create a server instance</h3><br>
         <p>
             3) Make a "app.js" file<br><br>
@@ -153,15 +167,15 @@
         </p>
 <pre>
     <code>
-    import express from "express"; 
+        import express from "express"; 
     </code>
 </pre>
         <p>
-            5) Instansiate the package and assign the returned object to the constant variable "app"
+            5) Instansiate the package and assign the returned object to the variable "app"
         </p>
 <pre>
     <code>
-    const app = express();
+        const app = express();
     </code>
 </pre>
             The "app" object is the central part of the application, because you can use it to define the 
@@ -172,20 +186,20 @@
             </p>
 <pre>
     <code>
-    // parses requests with JSON payloads
-    // for POST requests
+        // parses requests with JSON payloads
+        // for POST requests
 
-    app.use(express.json());
+        app.use(express.json());
 
-    // parses requests with URL-encoded payloads
-    // for HTML form submits
+        // parses requests with URL-encoded payloads
+        // for HTML form submits
 
-    app.use(express.urlencoded({ extended: true }));
+        app.use(express.urlencoded({ extended: true }));
 
-    // serving static files from the public directory
-    // for CSS, HTML and JavaScript files 
+        // serving static files from the public directory
+        // for CSS, HTML and JavaScript files 
 
-    app.use(express.static("public"));
+        app.use(express.static("public"));
     </code>
 </pre>
             "app.use()" is a method that allows you to register middleware functions. To be able to 
@@ -196,13 +210,13 @@
             </p>
 <pre>
     <code>
-    const PORT = 8080;
-    app.listen(PORT, (error) => {
-        if (error) { 
-            console.log(error); 
-        }
-        console.log("Server is running on port " + PORT);
-    });
+        const PORT = 8080;
+        app.listen(PORT, (error) => {
+            if (error) { 
+                console.log(error); 
+            }
+            console.log("Server is running on port " + PORT);
+        });
     </code>
 </pre>
             This has to be at the bottom of the app.js file (common practice)<br><br>

@@ -16,6 +16,8 @@
 <div class="col-8 mt-5">
     <h1>Loop methods</h1><br><br>
 
+<!---------------------------------------------------------------------------------------------------------------------->
+
     <h6>
         <h3 id="loops">Loops</h3><br>
         Used to iterate over an array or other iterable objects. There are different kinds of loops that loops
@@ -29,33 +31,48 @@
         If the index order matters, then don't use <i>for in</i> loop, because you don't know in which order the
         values are accessed. In this case, it is better to use a <i>for</i> or <i>for of</i> loop.<br><br><br>
 
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h3 id="methods">Methods</h3><br>
         When you want to find the id or something else in an array/collection, then you should use loop methods
-        and NOT for-loops and while-loops.<br><br>
+        and NOT for-loops and while-loops.<br><br><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
 
         <h5>.map()</h5><br>
         It applies a transformation function (once) to each element in an iterable and transform them into a new
         iterable e.g. converting the elements from one datatype to another etc. It returns a new array with the exact 
         same length as the original, which means it does not change the original array. It does not execute functions 
-        on empty elements.<br><br>
+        on empty elements.<br><br><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
 
         <h5>.filter()</h5><br>
         It makes a superficial and shorter copy of a "portion" of the original array containing fewer elements
         that live up to the condition with a true or false result. It doesn't change the origianl array, and it 
-        doesn't execute functions on empty elements. <strong>OBS:</strong> you should not use this method with large 
-        data sets - it won't be wrong to use it, but it will decrease performance/effeciency because you have to loop 
-        through each element in the collection.<br><br>
+        doesn't execute functions on empty elements.<br><br>
+        <div class="box-important">
+            OBS: you should not use this method with large 
+            data sets - it won't be wrong to use it, but it will decrease performance/effeciency because you have to loop 
+            through each element in the collection.
+        </div><br><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
 
         <h5>.find()</h5><br>
         Returns the value of the first element it finds that passes the "test" of the function, which it
         executes for each element in the array/collection. If it doesn't find any elements that passes, then it returns 
-        <i>undefined</i>. It doesn't change the original array, and it doesn't execute functions on empty elements.<br><br>
+        <i>undefined</i>. It doesn't change the original array, and it doesn't execute functions on empty elements.<br><br><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
 
         <h5>.findIndex()</h5><br>
         Used to search an array and find the index of the first element that satisfies a specified condition. It takes a 
         callback function as an argument and applies that function to each element of the collection. Once the element is 
         found it returns the index of the array. If no element satisfies the condition it returns -1. This method gives 
-        instant access, and increases performance instead of using .find() or .filter() or .indexOf().<br><br>
+        instant access, and increases performance instead of using .find() or .filter() or .indexOf().<br><br><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
 
         <h5>.forEach()</h5><br>
         <div class="box-info">
@@ -67,6 +84,8 @@
             through the data.
         </div><br><br><br>
 
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h3 id="why">Why is a functional approach to loops to be preferred?</h3><br>
         Because it makes the code:<br><br>
         <p>
@@ -77,6 +96,8 @@
             - More clear<br>
             - More clean
         </p><br><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
 
         <h3 id="quiz">Tiny quiz - can you get the method right?</h3><br>
         <table class="table table-borderless table-sm">
@@ -117,34 +138,37 @@
                 <td><span id="result6"></span></td>
             </tr>
         </table><br><br>
-  
-    <h3 id="smell">Code smell</h3><br>
-    <div class="box-info">
-        Any characteristic in the source code that possibly indicates a deeper problem. But code smells are
-        not necessarily a problem.
-        They are signs that something might be wrong with the code. Things that could trigger code smell,
-        and thereby make the code less
-        readable and maintainable, could be:<br>
-        <p> 
-            - Too many indentation levels<br>
-            - Long functions<br>
-            - Too many parameters<br>
-            - Complex code<br>
-            - Copy/pasted code<br>
-            - Wrong use of equality<br>
-            - Comments and dead code<br>
-            - map() without encapsulation
-        </p>
-        
-    </div><br><br>
 
-    <h3 id="no-side-effects">How to implement loop methods without side effects?</h3><br>
-    <span class="emphasis">Side effects</span> makes the code more difficult to understand and test. It
-    could be: the use of while -and for-loops, because if something goes wrong and the loop somehow "breaks" then 
-    the function that depends on it will also break, or it could be nested map() methods that could result in 
-    performance issues, or it could be that you reuse a function in its original state after it has been mutated, 
-    because when you've made a new 'state' of a function then you should use that and never look back.
-    The following code shows how to minimize the side effects:<br><br>
+<!---------------------------------------------------------------------------------------------------------------------->
+
+        <h3 id="smell">Code smell</h3><br>
+        <div class="box-info">
+            Any characteristic in the source code that possibly indicates a deeper problem. But code smells are
+            not necessarily a problem.
+            They are signs that something might be wrong with the code. Things that could trigger code smell,
+            and thereby make the code less
+            readable and maintainable, could be:<br><br>
+            <p> 
+                - Too many indentation levels<br>
+                - Long functions<br>
+                - Too many parameters<br>
+                - Complex code<br>
+                - Copy/pasted code<br>
+                - Wrong use of equality<br>
+                - Comments and dead code<br>
+                - map() without encapsulation
+            </p>
+        </div><br><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
+
+        <h3 id="no-side-effects">How to implement loop methods without side effects?</h3><br>
+        <span class="emphasis">Side effects</span> makes the code more difficult to understand and test. It
+        could be: the use of while -and for-loops, because if something goes wrong and the loop somehow "breaks" then 
+        the function that depends on it will also break, or it could be nested map() methods that could result in 
+        performance issues, or it could be that you reuse a function in its original state after it has been mutated, 
+        because when you've made a new 'state' of a function then you should use that and never look back.
+        The following code shows how to minimize the side effects:<br><br>
 <pre>
     <code>
         const rocks = [
@@ -190,9 +214,12 @@
         when using rocksAgedOneYear1 because that function made a new copy of
         the object inside { }.*/   
     </code>
-</pre>
+</pre><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h3 id="choose-method">How to choose the right loop method?</h3><br>
-        This can be explained by the following code examples:<br><br>
+        This can be explained by the following code examples:<br>
 <pre>
     <code>
 

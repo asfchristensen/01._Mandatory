@@ -5,11 +5,12 @@
     height: auto;
     border: 0.2em solid;
     border-color: black;
+    background-color: rgb(4, 5, 5);
 }
 
 
 /* -------------- TEXT -------------- */
 
 #command {
-    color: rgb(74, 136, 72);
+    color: rgb(109, 164, 107);
 }

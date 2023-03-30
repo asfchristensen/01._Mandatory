@@ -14,19 +14,24 @@
 <div class="col-8 mt-5">
     <h1>SSR & CSR</h1><br><br>
 
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h6>
             <h3 id="ssr">Server-Side Rendering</h3><br>
             (SSR) Involves generating HTML on the server and sending it to the client as a complete page. When a user requests a page, the server 
             fetches the necessary data, generates the HTML and sends it back to the client. The client then recieves a complete page and can 
             display it immediately.<br><br><br> 
             
+<!---------------------------------------------------------------------------------------------------------------------->
 
             <h3 id="csr">Client-Side Rendering</h3><br>
             (CSR) Involves generating the initial HTML and JavaScript code on the client-side. When a user requests a page, the server sends a 
             minimal HTML file and a JavaScript bundle. The JavaScript code is responsible for fetching the data and rendering the page on the 
             client-side. This makes the page more dynamic and interactive.<br><br><br>
 
-            <h3 id="plus-minus">+ & - with SSR & CSR</h3><br><br>
+<!---------------------------------------------------------------------------------------------------------------------->
+
+            <h3 id="plus-minus">+ & - with SSR & CSR</h3><br>
             <table class="table table-bordered table-warning">
                 <thead>
                     <tr class="table-success">
@@ -82,7 +87,9 @@
                 </tbody>
             </table><br><br>
 
-            <h3 id="ssr-setup">SSR setup in class</h3><br><br>
+<!---------------------------------------------------------------------------------------------------------------------->
+
+            <h3 id="ssr-setup">SSR setup in class</h3><br>
             <p>
                 - Import the built-in module "fs"<br>
                 - Import an escape module to sanitize inputs<br>
@@ -97,8 +104,8 @@
             file from the server's file system and convert it to a string. The string can then be used by the template engine to dynamically generate 
             the HTML content (the concatenation in renderPage: return navbar + page + footer) to be sent to the client. The following code is meant to 
             imitate a real template engine e.g. "Handlebars" that needs to be installed with npm.<br><br> 
-    <pre>
-        <code>
+<pre>
+    <code>
         import fs from "fs";
         
         function renderPage(page, config = {}) {   
@@ -119,8 +126,8 @@
             renderPage,
             readPage
         }
-        </code>
-    </pre>
+    </code>
+</pre>
             We should probably use fs.readFile() instead, because it reads files asynchronously, but it's an active choice to use <a href="/serve_html#fs-module">fs.readFileSync()</a> that 
             reads files synchronously, because we want to block the server from reading and executing the files, because we are not ready at this time 
             to render the HTML files. All the files in the project have be read and rendered before anything else can happen.<br><br><br>
@@ -129,24 +136,23 @@
                 Being in a dev environment and setting up SSR and want to check for changes every time you make changes in the source code, you have to 
                 make a nodemon.json file with the dependencies "ext":"js,html,json" and the write the command <a href="/terminal#update-with-sync">nodemon --ext html,js app.js</a>.
             </div><br><br>
-
             <p>
                 - Import the templateEngine in the app.js file to access the exported functions 
             </p>
-    <pre>
-        <code>
-    import templateEngine from "./util/templateEngine.js"
-    
-    const frontpage = templateEngine.readPage("./public/pages/frontpage/frontpage.html");
-    const frontpagePage = templateEngine.renderPage(frontpage, {
-        tabTitle:  "Upper | Welcome"
-    });
-    
-    app.get("/", (req, res) => {
-        res.send(frontpagePage);
-    });
-        </code>
-    </pre>
+<pre>
+    <code>
+        import templateEngine from "./util/templateEngine.js"
+
+        const frontpage = templateEngine.readPage("./public/pages/frontpage/frontpage.html");
+        const frontpagePage = templateEngine.renderPage(frontpage, {
+            tabTitle:  "Upper | Welcome"
+        });
+
+        app.get("/", (req, res) => {
+            res.send(frontpagePage);
+        });
+    </code>
+</pre>
             <div class="box-important">
                 IMPORTANT: res.sendFile() is replaced with res.send(), because with res.sendFile() the files were send directly to the client for the browser to handle. Because of SSR we want 
                 to render the whole HTML page first and the send it to the client - why we use res.send() that sends the rendered page as a String.  
@@ -156,7 +162,9 @@
                 how to divide the HTML page for the respective components.<br><br>
                 - Make the HTML pages more dynamic and reusable as components (see <a href="/html_design">HTML</a>) 
             </p><br><br>
-      
+            
+<!---------------------------------------------------------------------------------------------------------------------->
+
             <h3 id="memory">How code affects the application's memory</h3><br>
             <p>
                 - Code size

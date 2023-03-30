@@ -21,6 +21,8 @@
         </p>
         Both modules are used to organize and shar code in a project, but they have different syntax and behaviours.<br><br><br>
 
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h3 id="common">CommonJS - the old way of doing it</h3><br>
         This module system loads synchronously, which means the modules can be used immediately after they are imported, and they are 
         primarily used in a server-side environment. They have a vague scope.<br><br>
@@ -71,6 +73,8 @@
     </code>
 </pre><br>
 
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h5>require()</h5><br>
         Built-in function that is used to load modules into a Node.js application. It allows you to include code from other modules in
         the application, and thereby break the application into smaller pieces. It takes the path to the module, you want to load, as the 
@@ -83,20 +87,24 @@
         const fs = require("fs");
     </code>
 </pre>          
-                <p>
-                    2) Local modules
-                </p>
+        <p>
+            2) Local modules
+        </p>
 <pre>
     <code>
         const tanksUtil = require("./util/tanks.js");
     </code>
-</pre><br>
-                When you require a module Node.js will first search for the module in the built-in modules, then in the <a href="packages/#node-module">node_modules</a>
-                and finally in the local directory. Once it finds the module it will load it and the return the "exports" object assigned to "module.exports".<br><br>
+</pre>
+        When you require a module Node.js will first search for the module in the built-in modules, then in the <a href="packages/#node-modules">node_modules</a>
+        and finally in the local directory. Once it finds the module it will load it and the return the "exports" object assigned to "module.exports".<br><br><br>
 
-                <h5>module.exports</h5><br>
-                An object in Node.js that is used to define what a module should export as its public API. Here you define the porperties and or methods you want to make 
-                available to other modules by setting them as properties of the "module.exports" object.<br><br><br> 
+<!---------------------------------------------------------------------------------------------------------------------->
+
+        <h5>module.exports</h5><br>
+        An object in Node.js that is used to define what a module should export as its public API. Here you define the porperties and or methods you want to make 
+        available to other modules by setting them as properties of the "module.exports" object.<br><br><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
 
         <h3 id="ecma">ECMAScript - the new way of doing it</h3><br>
         This module system loads asynchronously, which means that the modules cannot be immeadiately available after import. They are
@@ -110,7 +118,6 @@
             - Importing modules use <span class="emphasis">import</span> keyword<br>  
             - Exporting modules use <span class="emphasis">export</span> keyword  
         </p>
-
 <pre>
     <code>
         // package.json 
@@ -147,51 +154,60 @@
         console.log(guards);
     </code>
 </pre>
-        <div class="box-info">
-            OBS: If you want to import a .json file you have to add <span class="emphasis">assert{}</span> in the import statement:
+        <div class="box-important">
+            OBS: If you want to import a .json file you have to add <span class="emphasis-important">assert{}</span> in the import statement:
 <pre>
     <code>
-    import jokes from "./jokes.json" assert { type: "json" };
+        import jokes from "./jokes.json" assert { type: "json" };
     </code>
 </pre>
             This is because "import" can't recognize "json" format.
-        </div><br><br><br> 
+        </div><br><br> 
+
+<!---------------------------------------------------------------------------------------------------------------------->
 
         <h3 id="export">export vs. export default</h3><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h5>export</h5><br>
         For named exports! This keyword is used when you want to export a named function e.g.: 
 <pre>
     <code>
-    // module.js 
+        // module.js 
 
-    export function greeting() {
-        console.log('Export me!');
-    }
+        export function greeting() {
+            console.log('Export me!');
+        }
 
-    // app.js
+        // app.js
 
-    import { greeting } from "./module.js"; // import is with { }
-    greeting();
+        import { greeting } from "./module.js"; // import is with { }
+        greeting();
     </code>
-</pre>
+</pre><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
 
         <h5>export default</h5><br>
         For unnamed exports! This statement is also used to export expressions/functions et.c but you can only have 1 default export in each file! So if a module's primary 
-        purpose is to house one specific export, then it should be exported as a default export.<br>
+        purpose is to house one specific export, then it should be exported as a default export.
 <pre>             
     <code>
-    // module.js
+        // module.js
 
-    export default function greeting() {
-        console.log('Export me by default!');
-    }
+        export default function greeting() {
+            console.log('Export me by default!');
+        }
 
-    // app.js 
+        // app.js 
 
-    import greeting from "./module.js"; // import without { }
-    greeting();
+        import greeting from "./module.js"; // import without { }
+        greeting();
     </code>
 </pre><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
 
         <h3 id="js-modules">Make JS files to modules</h3><br>
         <div class="box-important">

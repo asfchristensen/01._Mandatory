@@ -31,6 +31,8 @@
             4) Nothing
         </p><br>
 
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h5 id="const">const</h5><br>
         <p>
             - Not a constant!<br>
@@ -71,7 +73,9 @@
         const car = "Volvo";
         const car; // not allowed!
     </code>
-</pre>
+</pre><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
 
     <h5 id="let">let</h5><br>
     <p>
@@ -105,7 +109,9 @@
         let car = "Volvo";
         let car; // not allowed! 
     </code>
-</pre> 
+</pre><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
 
     <h5 id="var">var</h5><br>
     <p>
@@ -113,13 +119,14 @@
         - No scope (can be accessed from everywhere)<br>
     </p><br>
 
+<!---------------------------------------------------------------------------------------------------------------------->
 
     <h3 id="global">Global variables</h3><br>
-    <div class="box-info">
-        Be careful when using global variables. <span class="emphasis">First</span> of all, if you declare 
+    <div class="box-important">
+        Be careful when using global variables. <span class="emphasis-important">First</span> of all, if you declare 
         a global variabel and accidently re-declare it, the first variable will be overwritten. 
-        <span class="emphasis">Secondly</span>, global variables take longer for JavaScript to find than local 
-        ones. Eventhough the speed difference isn't huge, it still exists. <span class="emphasis">Thirdly</span>
+        <span class="emphasis-important">Secondly</span>, global variables take longer for JavaScript to find than local 
+        ones. Eventhough the speed difference isn't huge, it still exists. <span class="emphasis-important">Thirdly</span>
         it can cause maintenance difficulties due to increased coupling that reduces testability in the code.<br>  
 <pre>
     <code>
@@ -142,7 +149,7 @@
             }, 1000);
         } 
     </code>
-</pre><br>
+</pre>
         The 'i' is global do to 'var' and therefor 'i' points at the global 'i' that after
         1 second already incremented to 6, and prints it out 6 times.  
     </div>

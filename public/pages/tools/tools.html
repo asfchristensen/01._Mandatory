@@ -15,36 +15,52 @@
 <div class="col-8 mt-5">
     <h1>Tools</h1><br><br>
 
+<!---------------------------------------------------------------------------------------------------------------------->
+
     <h6>
         <h3 id="functionality">Functionality</h3><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h5 id="nodemon">Nodemon</h5><br>
         A command-line utility for Node.js that helps in the development process by automatically restarting the Node.js application, whenever
         changes are made to the source code or the filesystem. This saves a lot of time when working on Node.js projects, because you would 
         otherwise have to manually stop and restart the application every time a change is made in the project, by constantly typing the command:
-        "node filename.js" (see <a href="/terminal">terminal commands</a>).<br><br>
-        The tool is installed globally with npm (Node Package Manager, see <a href="/packages">packages</a>) and can be used with any Node.js project.
+        <a href="/terminal#running">node filename.js</a>.<br><br>
+        The tool is installed globally with <a href="/packages#managers">npm</a> and can be used with any Node.js project.
         It also provides several configuration options that can be used to customize the behaviour of the tool e.g. ignoring specific files, specifying
         a delay before restarting, execute and restart HTML and JavaScript files eventhough they are to be read with .readFileSync() etc.<br><br>
-        Eventhough the tool speeds up the process for development, there are some downsides too:<br><br>
-        <p>
-            - Increased ressource usage (it monitors the file system for changes which can increase CPU and memory usage, and it can slow down the
-            computer when working on large projects)<br><br>
-            - False positives (it can detect not-relevant changes that the application doesn't use and cause unnecessary restarts that can slow 
-            down the process)
-        </p> 
+        <div class="box-important">
+        Eventhough the tool speeds up the process for development, there are downsides too:<br><br>
+            <p>
+                - Increased ressource usage (it monitors the file system for changes which can increase CPU and memory usage, and it can slow down the
+                computer when working on large projects)<br><br>
+                - False positives (it can detect not-relevant changes that the application doesn't use and cause unnecessary restarts that can slow 
+                down the process)
+            </p>
+        </div><br><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
 
         <h5 id="postman">Postman</h5><br>
         This tool is used for testing APIs without a browser. It has an interface for making HTTP requests to API endpoints and recieving responses, which 
         makes it easy to test and see, if the backend of the project works. It is possible to save the requests , so you don't have to write them every time,
-        which can make the process easier and faster.<br><br><br>  
+        which can make the process easier and faster.<br><br><br>
 
+<!---------------------------------------------------------------------------------------------------------------------->
 
         <h3 id="deployment">Deployment</h3><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h5 id="vercel">Vercel</h5><br>
         A cloud platform for building and deploying static websites, and it supports the Node.js framework. It is easy to use and free of charge
-        (for small projects), and provides integration with GitHub. One of the downsides encountered by using this tool is that you have to embed
-        the CSS and JavaScript in the HTML file, or else Vercel can't display the styling or dynamic functionality. This means you can't have 
-        a package and file structure in your project.<br><br>
+        (for small projects), and provides integration with GitHub.<br><br>
+        <div class="box-important">
+            One of the downsides encountered by using this tool is that you have to embed
+            the CSS and JavaScript in the HTML file, or else Vercel can't display the styling or dynamic functionality. This means you can't have 
+            a package and file structure in your project.
+        </div><br>
         
         If this tool is used, you have to create a "vercel.json" file in the root of the project and write:<br>
 <pre>
@@ -67,11 +83,13 @@
     </code>
 </pre><br>
 
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h3 id="clean">Clean up code</h3><br>
         <div class="box-info">
             <h5>Prettier</h5><br>
             A code formatter that helps clean up code. It points out where the mistakes are and enforces a consistent style, which makes the code
-            easier to read and maintain. It can be installed as a plug-in/extension in VSC.<br><br>
+            easier to read and maintain. It can be installed as a plug-in/extension in VSC.<br><br><br>
 
             <h5>ESLint</h5><br>
             A linter that checks code for syntax errors, coding standards and other potential issues. Can be used to enforce coding conventions,

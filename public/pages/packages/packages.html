@@ -3,6 +3,7 @@
         <h3>Subjects</h3>
     </div>
     <div class="sidebar">
+        <a href="#what"><button class="subject">What is a package?</button></a>
         <a href="#node-modules"><button class="subject">node_modules</button></a>
         <a href="#managers"><button class="subject">Package managers</button></a>
         <a href="#package-json"><button class="subject">package.json setup</button></a>
@@ -15,6 +16,7 @@
     <h1>Packages</h1><br><br>
 
     <h6>
+        <h3 id="what">What is a package?</h3><br>
         A package is a set of modules that are organized in a structered way and can be installed, stored in   
         <span class="emphasis">node_modules</span> folder and managed with the <span class="emphasis">npm</span>. 
         It consists of a <span class="emphasis">package.json</span> file that includes metadata about the package 
@@ -30,7 +32,9 @@
         Packages are important for Node.js projects, because they provide a way for sharing and reusing code 
         across different projects and teams. It's also time optimizing because you don't have to spend time 
         "reinventing the wheel" but solely focus on building new features and functionality on top of existing code.
-        Following are some examples of packages we have been working on in this course.<br><br> 
+        Following are some examples of packages we have been working on in this course.<br><br><br>
+
+ <!---------------------------------------------------------------------------------------------------------------------->
 
         <h3 id="node-modules">node_modules</h3><br>
         A folder that contains/is a "cache" for all the dependencies (third-party packages and modules) required by the Node.js 
@@ -41,23 +45,32 @@
         (if using CommonJS modules) or "import "package" (if using ECAMScript modules) then Node.js will look for the 
         package in the node_modules folder, and if it finds the package, it will load the module and make it available 
         in the code. It's located in root of the project.<br><br>
-        Never push this (actively) to Git, because others are going to download it (and it's a big file) and can slow 
-        down performance. Furthermore everyone who downloads it will get that version of the packages and thereby not
-        the updated ones.<br><br>
+        <div class="box-important">
+            Never push this (actively) to Git, because others are going to download it (and it's a big file) and can slow 
+            down performance. Furthermore everyone who downloads it will get that version of the packages and thereby not
+            the updated ones.
+        </div><br><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
 
         <h3 id="managers">Package managers</h3><br>
         The package managers manage the packages. A collection of software tools that automates the process by installing, 
-        updating, configuring and removing programs for an application.<br><br>
+        updating, configuring and removing programs for an application.<br><br><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h5>Maven</h5><br>
         Manages dependencies and builds the process for Java projects. It downloads the dependencies 
-        needed (libraries or JAR files) for the application and stores them in a pom-xml file.<br><br> 
+        needed (libraries or JAR files) for the application and stores them in a pom-xml file.<br><br><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
+ 
         <h5>npm</h5><br>
         "Node Package Manager". It is used to manage and share packages of code written in JavaScript.
-        It provides a vast repository of open-source packages that can be installed with the npm command 
-        (see <a href="/terminal">terminal</a>) and gets stored locally in the project's "node_modules" 
-        directory. Besides managing packages it also manages dependencies, running scripts and publishing
+        It provides a vast repository of open-source packages that can be installed with the <a href="/terminal#install">npm command</a> and gets 
+        stored locally in "node_modules" directory. Besides managing packages it also manages dependencies, running scripts and publishing
         packages to the npm registry. It allows versioning of packages, which means you can specify the version
-        of af package the project should depend on, in the "package.json" file.<br><br>
+        of af package the project should depend on, in the "package.json" file.<br><br><br>
 
         <table class="table table-bordered table-warning">
             <thead>
@@ -85,10 +98,17 @@
                 </tr>
             </tbody>
         </table><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
             
         <h5>Gradle, Ant, Homebrew</h5><br><br>
 
-        <h3 id="package-json">Set up package.json</h3><br>
+<!---------------------------------------------------------------------------------------------------------------------->
+
+        <h3 id="package-json">Setup package.json</h3><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h5>Manually</h5><br>
         When making a npm-project you should always have a package.json file. Setting it up manually:<br><br>
         <p>
@@ -111,6 +131,8 @@
             *) To uninstall the package, write "sudo npm install express" again
         </p><br>
 
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h5>Automatically</h5><br>
         <p>
             1) Write "npm init -y" command in the terminal in the project folder<br>
@@ -122,6 +144,8 @@
             6) The package gets stored automatically in node_modules folder<br>
             *) To uninstall the package, write "sudo npm install express" again 
         </p><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
 
         <h3 id="express">Express (third party library)</h3><br>
         A web application framework (library) for Node.js that can be described as an extra layer on top of Node.js. It's installed 
@@ -179,6 +203,8 @@
         </p><br> 
         Express is often used to build RESTful APIs and it includes: routes (represents ressources), HTTP methods (actions on ressources), 
         middleware functions, response format (JSON) and error handling.<br><br><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
 
         <h3 id="escape">Escape-html (third-party library)</h3><br>
         A module that provides a way to escape special characters in HTML code to prevent them from being executed as code. If the special 

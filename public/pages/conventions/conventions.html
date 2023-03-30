@@ -15,11 +15,15 @@
 <div class="col-8 mt-5">
     <h1>Conventions to follow</h1><br><br>
 
+<!---------------------------------------------------------------------------------------------------------------------->
+
     <h6>
         <h3 id="what">What are conventions?</h3><br>
         A set of agreed-upon standards or guidelines that are followed by developers. The 
         conventions cover various aspects fo software development e.g. coding style, naming
         conventions, file organization, documentation, testing and version control.<br><br><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
         
         <h3 id="code-conventions">Code conventions</h3><br>
         Having code conventions means that you have guidelines for a specific programming language that you must
@@ -33,7 +37,7 @@
             - Use semicolons (;) after statements 
         </p><br>
 
-        And examples of conventions in <span class="emphasis">Node.js</span>:<br><br>
+        Examples of conventions in <span class="emphasis">Node.js</span>:<br><br>
         <p>
             - Use ECMAScript module format instead of CommonJS<br>
             - Use single quotes (') for strings<br>
@@ -41,11 +45,15 @@
             - Always make a "app.js" file to hold the routes<br>
         </p><br>
 
+<!---------------------------------------------------------------------------------------------------------------------->
+
         <h3 id="clean">Clean code</h3><br>
         You basically write code for the "future you" and your co-workers. Not the machine.
         It states that all code should be readable and understandable. That's why you should never use abbrevations for variables 
         e.g. <i>footballTrainer</i> should not be named <i>ft</i> etc. It's better to use clear and readable variable names rather
         than having a lot of comments in the code.<br><br><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
         
         <h3 id="good-idea">Clean code and code conventions is a good idea, because:</h3><br>
         <p>
@@ -65,8 +73,9 @@
             - Waste of time not having conventions (you spent time figuring out the code!)
         </p><br>
 
-    <h3 id="strict">Strict mode</h3><br>
-    <div class="box-info">
+<!---------------------------------------------------------------------------------------------------------------------->
+
+        <h3 id="strict">Strict mode</h3><br>
         The <span class="emphasis">"use strict";</span> expression defines that the JavaScript code should be executed in a strict mode.
         It has a global scope and will only be recognized at the top of the script og function:<br>
 <pre>
@@ -86,20 +95,22 @@
         console.log(y); // ReferenceError: y is not defined
     </code>
 </pre>
-            This means that the code is now a stricter version of the language that provides additional safety checks and prevents certain
-            actions that could lead to bugs or security vulnerabilities e.g.:<br><br>
-            <p>
-                - Variables must be declared before they are used<br>
-                - Cannot assign a value to an undeclared function (prevents making global variabels by accident)<br>
-                - Duplicate property names in objects are not allowed<br>
-            </p><br>
-            A bad syntax is now being interpreted as errors, so the code should now be more "clean", realiable, predictable and secure. 
-    </div><br><br>
+        This means that the code is now a stricter version of the language that provides additional safety checks and prevents certain
+        actions that could lead to bugs or security vulnerabilities e.g.:<br><br>
+        <p>
+            - Variables must be declared before they are used<br>
+            - Cannot assign a value to an undeclared function<br>
+            (prevents making global variabels by accident)<br>
+            - Duplicate property names in objects are not allowed<br>
+        </p><br>
+        A bad syntax is now being interpreted as errors, so the code should now be more "clean", realiable, predictable and secure.<br><br><br>
+
+<!---------------------------------------------------------------------------------------------------------------------->
 
     <h3 id="tools">Tools to clean up code</h3><br>
     <div class="box-info">
-        Following tools are both used to improve the quality and consistency of code. They can be used together e.g. <a href="/tools">Prettier</a> can format
-        the code automatically, while <a href="/tools">ESLint</a> can enforce coding standards and identify portential issues.
+        Following tools are both used to improve the quality and consistency of code. They can be used together e.g. <a href="/tools#clean">Prettier</a> can format
+        the code automatically, while <a href="/tools#clean">ESLint</a> can enforce coding standards and identify portential issues.
     </div>
     </h6>
 </div>
