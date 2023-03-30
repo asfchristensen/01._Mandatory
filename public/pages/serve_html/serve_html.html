@@ -3,12 +3,157 @@
         <h3>Subjects</h3>
     </div>
     <div class="sidebar">
-        <a href="#"><button class="subject"></button></a>
-        <a href="#"><button class="subject"></button></a>
-        <a href="#"><button class="subject"></button></a>
+        <a href="#modules"><button class="subject">Modules: path & fs</button></a>
+        <a href="#serve-static"><button class="subject">Serve static files</button></a>
+        <a href="#security"><button class="subject">Security need for serving static files</button></a>
+        <a href="#ways"><button class="subject">Ways of sending static files</button></a>
+        <a href="#dirname"><button class="sub-subject">__dirname</button></a>
+        <a href="#path"><button class="sub-subject">path</button></a>
+        <a href="#fs-module"><button class="sub-subject">fs</button></a>
+        <a href="#send"><button class="sub-subject">send</button></a>
     </div>
 </div>
 
 <div class="col-8 mt-5">
-    <h1></h1>
-</div><br>
+    <h1>Serving HTML</h1><br><br>
+
+    <h6>
+        After having set up the server and app.js file (see <a href="/app_setup">app.js setup</a>) you can then add frontend to you application, and 
+        serve static files.<br><br><br>
+
+        <h3 id="modules">Modules to use</h3><br>
+        <h5>path (built-in module)</h5><br>
+        Part of the Node.js core and is installed automatically when you install Node.js on the system. Here you don't need to use "npm install"
+        like you do with Express. It can simply be imported into the project.<br><br>
+
+        It provides functions for working with the file -and directory paths.<br><br> 
+
+        <h5>fs (built-in module)</h5><br>
+        Part of the Node.js core and is installed automatically when you install Node.js on the system. Here you don't need to use "npm install"
+        like you do with Express. It can simply be imported into the project.<br><br>
+
+        Used to work with the file system on the computer, and provides methods for reading, writing and manipulating files and directories.<br><br><br>
+        
+        <h3 id="serve-static">Serve static files</h3><br>
+        In the app.js file you need to use the middleware function "static" in Express to serve static files, when you use the Express framework:<br>
+<pre>
+    <code>
+        app.use(express.static("public"));
+    </code>
+</pre>
+        The code tells Express to serve static files from the "public" directory at the root of the server.<br><br> 
+
+        <div class="box-important">
+            Express does not by default allow serving static files. A client/browser can only download the files by calling:
+            "app.use(express.static("public"));". This is in contrast to Spring and Thymeleaf, where Spring, behind the scenes,
+            declares the ressources folder as static for us.
+        </div><br><br> 
+
+        <h3 id="security">Security need for serving static files</h3><br>
+        <div class="box-info">
+                Express has a "static folder" that can contain static files. In that folder you pass a "public folder" as a parameter that contains all the client-side files: 
+                html, js and css. This means that everything in that particular public folder can be accessed by the client. When writing "app.use(express.static("public"));" you 
+                basically say that it is <i>allowed</i> to access the files within. The client can, in the browser, write e.g.:
+    <pre>
+        <code>
+            https://localhost:8080/frontpage/frontpage.js
+        </code>
+    </pre>
+                Then the client will see the "frontpage.js" file in text-format in the browser. If the public folder was not defined in the static folder from Express, it would 
+                have given an error.<br><br>
+    
+                This is why it is important to "serve"/define client-files in the static folder, or else there will be a <span class="emphasis">security hole</span>, because 
+                then the client (or potential attacker) can access sensitive files or directories on your server. Let us say you have a file called "passwords.txt" in the project 
+                directory that contains sensitive information - if you don't use "express.static" an attacker could access the file by guessing its location on the server, and by 
+                typing the URL to the file in the browser:
+    <pre>
+        <code>
+            https://localhost:8080/security-folder/passwords.txt 
+        </code>
+    </pre>
+                With "express.static" the files inside are the only files accessible to the client. No others. Even if the attacker guesses the path, the person will have no access. 
+        </div><br><br>
+
+        <h3 id="ways">Ways of sending a static file</h3><br>
+        <h5 id="dirname">res.sendFile(__dirname + "/path");</h5><br>
+        One way of sending a HTML page to the client as a response that takes an absolute path as argument. "__dirname" variable is a special global 
+        variable that holds the absolute path of the directory that contains the script. "/path" represents the relative path to the file. Always 
+        remember the "/" in front on the path.<br>
+<pre>
+    <code>
+        app.get("/tanks", (req, res) => {
+            res.sendFile(__dirname + "/public/tanks/tanks.html");
+        });
+    </code>
+</pre> 
+            <div class="box-important">
+                If you had to write the absolute path every time (hardcoded) without the __dirname variable, it would:<br><br>
+                <p>
+                    - Limit the code to a specific OS system<br>
+                    - Share information about yourself (name, system..)<br>
+                    - Make rigid code (all users have to change the path)
+                </p> 
+            </div><br><br>
+
+            <h5 id="path">res.sendFile(path.resolve("path"));</h5><br>
+            Another way is to use this method to send a HTML page to the client as a response. The "path" module resolves a sequence of paths or path
+            segments (strings) into an absolute path. You only have to write the relative path as a parameter, which makes it more dynamic and can be 
+            used by everybody who works on the project. Never use the "/" in front of the path.<br>
+<pre>
+    <code>
+        app.get("/tanks", (req, res) => {
+            res.sendFile(path.resolve("public/tanks/tanks.html");
+        });
+    </code>
+</pre> 
+            <h5 id="fs-module">res.send(fs.readFileSync().toString());</h5><br>
+            This method is a built-in function of the "fs" module that reads the contents of a file synchronously and returns a "Buffer" object containing 
+            the file data - that's why you need to call .toString() to convert the buffer to a string format. Because it is read synchronously the execution 
+            of the program will be blocked until the file has been fully read.<br><br>
+
+            <div class="box-important">
+                This approach has a couple of potential issues:<br><br> 
+                <p>
+                    1) Reading files sync. can give performance issues<br><br>
+                    2) The file content are being sent as a string which can be inefficient for large files.<br><br>
+                    3) Reading large files can cause the server to become unresponsive or crash if multiple 
+                    requests are made concurrently. 
+                </p>
+            </div><br>
+            
+            But this is exactly what we want when making SSR because we want to block the server from executing the files before every 
+            file has been read. Then you only need to render the pages 1 time when the server starts (see <a href="/ssr_csr">SSR & CSR</a>)<br><br>
+
+            OBS: when working in a development environment and use nodemon that constantly updates the application whenever changes have been made, 
+            then you have to add a "nodemon.json" file with:<br>
+<pre>
+    <code>
+        {
+            "ext": "js, json, html"
+        }
+    </code>
+</pre>
+            And write "nodemon --ext html,js filename.js" (see <a href="/terminal#update-with-sync">terminal</a>)<br><br><br>
+            
+            <h5 id="send">res.send(parameter);</h5><br>
+            This method sends a response to the client with specified content as a parameter:<br><br>
+            <p>
+                - Clean HTML
+            </p>
+<pre>
+    <code>
+        app.get("/about", (req,res) => {
+            res.send(`
+                < h1 >About< /h1 >
+                < h3 >This is my about page.< /h3 >
+            `);
+        });   
+    </code>
+</pre>        
+            <p>
+                - Rendered page
+            </p><br>
+            When writing "rendered page" it refers to the HTML content that has been generated by a template engine (one custom designed for this -and future projects). 
+            This rendered page have been read by "fs.readFileSync().toString()" and rendered before it is sent to the client, which is the core of SSR (see <a href="/ssr_csr">SSR & CSR</a>).
+    </h6>
+</div>

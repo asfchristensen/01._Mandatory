@@ -1,0 +1,42 @@
+.folder {
+    width: 20px;
+    height: 15px;
+    display: inline-block;
+    margin: auto;
+    position: relative;
+    background-color: #98abbd;
+    border-radius: 0 3px 3px 3px;
+    margin-bottom: -8px;
+    margin-top: 12px;
+  }
+
+  .folder:before {
+    content: '';
+    width: 50%;
+    height: 0.2em;
+    border-radius: 0 20px 0 0;
+    background-color: #708090;
+    position: absolute;
+    top: -0.2em;
+    left: 0px;
+  }
+
+  .file-css {
+    font-weight: bold;
+    color: rgb(95, 161, 212);
+  }
+
+  .file-img {
+    font-weight: bold;
+    color: rgb(208, 83, 208);
+  }
+
+  .file-html {
+    font-weight: bold;
+    color: rgb(204, 52, 52);
+  }
+
+  .file-js {
+    font-weight: bold;
+    color: rgb(255, 200, 0);
+  }
