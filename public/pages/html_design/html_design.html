@@ -3,12 +3,254 @@
         <h3>Subjects</h3>
     </div>
     <div class="sidebar">
-        <a href="#"><button class="subject"></button></a>
-        <a href="#"><button class="subject"></button></a>
-        <a href="#"><button class="subject"></button></a>
+        <a href="#component"><button class="subject">Component</button></a>
+        <a href="#convention"><button class="subject">Conventions</button></a>
+        <a href="#css"><button class="subject">CSS Styling</button></a>
+        <a href="#scoping"><button class="subject">Scoping</button></a>
+        <a href="#type-attribute"><button class="subject">< type="module" ></button></a>
+        <a href="#graph"><button class="subject">Dependency Graph</button></a>
+        <a href="#bloat"><button class="subject">Memory bloat</button></a>
     </div>
 </div>
 
 <div class="col-8 mt-5">
-    <h1></h1>
-</div><br>
+    <h1>HTML design</h1><br><br>
+
+    <h6>
+        This page describes good code conventions for HTML code and how to make HTML dynamic components.<br><br><br>
+
+        <h3 id="component">Components</h3><br>
+        When making SSR in the project, you have likely divided the HTML page into components and separated the navbar/header and footer 
+        from the body, making each of them components (see <a href="/app_setup#component">app.js setup</a>). When doing so, it's important to make the HTML-parts as reusable and dynamic as 
+        possible, and therefor you have to use non-standardized HTML attributes/elements aka. <span class="emphasis">$PLACEHOLDERS</span>:<br><br>
+<pre>
+    <code>
+        // Navbar component
+
+        < !DOCTYPE html >
+        < html lang="en" >
+
+        < head >
+        < meta charset="UTF-8" >
+        < meta http-equiv="X-UA-Compatible" content="IE=edge" >
+        < meta name="viewport" content="width=device-width, initial-scale=1.0" >
+
+        < link rel="stylesheet" href="/assets/css/main.css" >
+        $CSS_LINK
+
+        < title >$TAB_TITLE< /title >
+        < /head >
+        < body >
+            < main > 
+
+        // Footer component
+
+            < /main >
+
+        < footer id="footer" >
+        < p id="copyright-year">$FOOTER_YEAR< /p >
+        < /footer >
+
+        < /body >
+        < /html >
+    </code>
+</pre>
+        These components can now be used by the <a href="/rendering#engine">template engine</a> since it knows these components file paths, and 
+        reads them with the fs.readFileSync().<br><br>
+        
+        $CSS_LINK, $TAB_TITLE and $FOOTER_YEAR are not valid HTML syntax, but in this case they act like placeholders/SSR references and are getting 
+        replaced with dynamic content during the editing/rendering process.<br><br><br>
+
+        <h3 id="convention">Conventions</h3><br>
+        When structuring the HTML, you have to follow a specific semantic, where you divide the HTML content into a header, main and footer, because it 
+        will make the HTML-page more readable and natural:<br> 
+<pre>
+    <code>
+        < header />
+            // In here: navbar, CSS styling, tab-title 
+
+        < main />
+            // In here: body, main content 
+
+        < footer />
+            // In here: scripts, footer content 
+    </code>
+</pre><br>
+
+        <h3 id="css">CSS styling</h3><br>
+        <h5>tags</h5><br>
+        There exists 3 options for styling selectors in the HTML-file:<br><br>
+        <div class="box-important">
+            <p>
+                1) In-line-styling:
+            </p>
+<pre>
+    <code>
+        < body style="background-color: red">
+    </code>
+</pre>
+            BAD! because of separation of concern, refactoring etc.
+        </div><br><br>
+        <p>
+            2) CSS-sheet in the header:
+        </p>
+<pre>
+    <code>
+        < link rel="stylesheet" href="file.css">
+    </code>
+</pre>
+        GOOD!<br><br>
+        <div class="box-important">
+            <p>
+                3) Style tag i header: 
+            </p> 
+<pre>
+    <code>
+        "style-tag" 
+        body { background-color: aliceblue; } 
+        "style-tag"
+    </code>
+</pre>
+            BAD! You can't reuse the code in other documents
+        </div><br><br>
+
+        <h5>values</h5><br>
+        <p>
+            - em
+        </p>
+        A relative value that fits all screensizes and resolutions, and should be used instead of the outdated "px".<br><br><br>
+
+        <h3 id="scoping">Scoping</h3><br>
+        Always have <span class="emphasis">document.getElementById('#')</span> inside the scope:<br><br>
+<pre>
+    <code>
+        fetch("https://www.boredapi.com/api/activity")
+        .then(response => response.json())
+        .then(result => {
+            const insertActivity = document.getElementById('quest');
+            insertActivity.innerText = result.activity;
+        });
+    </code>
+</pre>
+        When having the "document.getElementById" inside the scope, it will get picked up by the garbage collector and not stored in memory, 
+        because it can't get referenced any other place in the code (helps with memory space).<br><br>
+        
+        If the "document.getElementById" was outside the scope like this:<br><br>
+<pre>
+    <code>
+        const insertActivity = document.getElementById('quest');
+
+        fetch("https://www.boredapi.com/api/activity")
+        .then(response => response.json())
+        .then(result => {
+            insertActivity.innerText = result.activity;
+        });
+    </code>
+</pre>
+        Then it could be referenced by other functions too, besides this one in the script. Everything can access it. But by doing this you loose 
+        scoping and thereby decrease readability, memory optimization and make it harder to maintain the code.<br><br><br>
+
+        <h5>Why is scoping good?</h5><br>
+        <p>
+            - Avoids name-conflicts<br>
+            - Encapsulation<br>
+            - Security<br>
+            - Performance<br>
+            - Memory optimization<br>
+            - Secures no global variables<br>
+            - Readability
+        </p><br><br>
+
+<!--type module------------------------------------------------------------------------------------------------------->
+
+        <h3 id="type-attribute">< type="module" ></h3><br>
+        <div class="box-important">
+            OBS: this is only important if you don't have the <a href="/import_export#type-property">type property</a> set in the package.json file! - 
+            if it's already defined in the package.json file it tells the browser to treat the .js file as a module. If it's not defined in the package.json file 
+            then you have to write it in the html as a type-attribute!</span><br><br>
+    
+            The type="module" attribute indicates that the specific script file is an ECMAScript module. This means that whatever functions are inside/exported in 
+            the specified script can now be accessed from other scripts by "import". It can also make it so that a console.log from a script can be shown in the console 
+            of the browser: 
+        </div><br>    
+<pre>
+    <code>
+        // barracks.js
+        
+        export const guards = [
+            "Hank the tank",
+            "Thomas the tank engine",
+            "CEPUS"
+        ];
+
+        // guards.js 
+
+        import { guards } from "./barracks.js";
+
+        console.log(guards);
+
+        // museumGuards.html 
+
+        < body >
+            < h1 >Museum Guards< /h1 >
+        
+            < script src="./guards.js" />
+        < /body >
+    </code>
+</pre>
+        How can you show the array of guards in the console of the browser without changing anything in the .js files? 
+        If you try go to the page "localhost:8080/museumGuards" and look in the console, it will print out:
+<pre>
+    <code>
+        Uncaught SyntaxError: 
+        Cannot use import statement outside a module (at guards.js:7:1)
+    </code>
+</pre>
+        This means that the "guards.js" is not defined as a module, but still considered a regular script. That's why you have to write this instead: 
+<pre>
+    <code>
+        .... 
+        < script src="./guards" type="module" />
+        ....
+    </code>
+</pre> 
+        The 'type="module"' attribute tells the browser that the script "guards.js" should be treated as a module and not a regular script. This allows 
+        for certain features, such as the ability for the script to "import" and "export" statements - if the type="module" attribute haven't been there, 
+        then the "guards.js" file would not have been allowed to import the array of guards from "barracks.js" and show them in the console in the browser.<br><br>
+        
+        <div class="box-important">
+            You could also have written this instead of using the type="module" attribute:
+<pre>
+    <code>
+    // museumGuards.html 
+
+    < body >
+        < h1 >Museum Guards< /h1 >
+    
+        < script src="./barracks.js" />
+        < script src="./guards.js" />
+    < /body >
+    </code>
+</pre>
+            This would also make it possible to console.log the guards in the browser if the "barracks.js" is above the "guards.js" file due to to 
+            <span class="emphasis">dependency graph</span>. There is just one problem: with large projects that contains a lot of scripts, it's nearly impossible to 
+            maintain an overview of which script should be above another, which is why it's better to use the type="module" attribute and avoid that issue.   
+        </div><br><br>
+
+        <h3 id="graph">Dependency Graph</h3><br>
+        <div class="box-info">
+            This is used to represent the flow of information. Its main purpose is to help the compiler with checking the different types of dependencies 
+            between statements and to prevent them from being executed in the wrong order, which can have a great impact on the application. Just like 
+            the code example with the "barracks.js" and "guards.js" - if the order was reverse, the application won't work and can cause 
+            <span class="emphasis">memory bloat</span>.<br><br><br>
+        </div><br><br>
+
+        <h3 id="bloat">Memory bloat</h3><br>
+        <div class="box-info">
+            Exceeding space in memory can cause memory bloat, and it can be caused by "circular dependencies" as with the "barracks.js" and "guards.js" files that 
+            depend on one another and thereby can cause an infinite loop of module loading in memory. It can cause "memory leaks" where the modules and other stored 
+            functions/variables don't get deleted even after they are not of use anymore. This is becuase ECMAScript modules makes separate instances of the modules 
+            for every import statement.
+        </div>
+    </h6>
+</div>
