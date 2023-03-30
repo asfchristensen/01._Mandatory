@@ -3,12 +3,233 @@
         <h3>Subjects</h3>
     </div>
     <div class="sidebar">
-        <a href="#"><button class="subject"></button></a>
-        <a href="#"><button class="subject"></button></a>
-        <a href="#"><button class="subject"></button></a>
+        <a href="#what"><button class="subject">What is REST API?</button></a>
+        <a href="#design"><button class="subject">Design</button></a>
+        <a href="#http"><button class="subject">HTTP</button></a>
+        <a href="#send"><button class="sub-subject">Send data (client)</button></a>
+        <a href="#recieve"><button class="sub-subject">Recieve data (client)</button></a>
+        <a href="#pure"><button class="subject">Pure API</button></a>
+        <a href="#how"><button class="subject">How to do HTTP methods in Express</button></a>
+        <a href="#json"><button class="subject">JSON</button></a>
     </div>
 </div>
 
 <div class="col-8 mt-5">
-    <h1></h1>
-</div><br>
+    <h1>REST API</h1><br><br>
+
+    <h6>
+        <h3 id="what">What is a REST API?</h3><br>
+        REST is an architectural style for building systems. It's a set of principles that define how web standards
+        like HTTP and URLs should be used, and it is based on:<br><br>
+        <p>
+             - Client-server architecture<br>
+             - Statelessness<br>
+             - Cacheability<br>
+             - Layered system
+        </p><br>
+        The HTTP-methods represent the actions that can be performed on a ressource/endpoint, and the URLs are used
+        to identify ressources/endpoints. The response from a REST API are typically returned as JSON.<br><br>
+        The REST API allows clients to interact with a web application by sending requests to then server and the recieve
+        a response.<br><br><br>
+        
+        <h3 id="design">Design</h3><br>
+        It is important to follow a set of conventions/best practices when creating and designing a REST API, e.g. 
+        <span class="emphasis">1)</span> it uses a specific order of HTTP methods to represent actions, 
+        <span class="emphasis">2)</span> it uses descriptive URIs (endpoints) with nouns (without extensions e.g. .json) to identify ressources e.g. /tasks, where the "/"
+        indicates a hierarchy. <u>IMPORTANT</u>: the nouns always have to be plural, because they are a collection of data that refers to a table in the database.
+        <span class="emphasis">3)</span> it uses HTTP status codes to represent success or failure.<br><br>
+        We follow two conventions in this course: the order of HTTP-methods and nouns in plural for the URIs like this:<br><br><br>
+        <table class="table table-bordered table-warning">
+            <thead>
+                <tr class="table-success">
+                    <th scope="col">Method</th>
+                    <th scope="col">URI/endpoint</th>
+                    <th scope="col">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>GET</td>
+                    <td>/birds</td>
+                    <td>Gets a list of all the entities</td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td>/birds/{id}</td>
+                    <td>Gets a single entity based on id</td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td>/birds/color/{color}</td>
+                    <td>Gets entities based on a string</td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>/birds</td>
+                    <td>Creates an entity</td>
+                </tr>
+                <tr>
+                    <td>PUT</td>
+                    <td>/birds/{id}</td>
+                    <td>Updates all fields based on id</td>
+                </tr>
+                <tr>
+                    <td>PATCH</td>
+                    <td>/birds/{id}</td>
+                    <td>Updates sepcific fields based on id</td>
+                </tr>
+                <tr>
+                    <td>DELETE</td>
+                    <td>/birds/{id}</td>
+                    <td>Deletes an entity based on id</td>
+                </tr>
+            </tbody>
+        </table><br><br>
+
+        <h3 id="http">HTTP</h3><br>
+        A stateless protocol used for communication (data transfer such as HTML pages, images and other files) 
+        over the internet, especially used in REST APIs, that enables communication between clients 
+        and servers. HTTP requests are happening everytime the client visits a webpage, submits a form or 
+        clicks a button and they include methods like GET, POST, PUT, PATCH and DELETE, 
+        which are actions to be performed by the server. HTTP responses typically include status codes
+        like 200 (OK), 404 (Not Found) and 500 (Internal Server Error), Content-types, Authorization etc.<br><br><br>
+       
+        <h5 id="send">How can the client send data? (requests)</h5><br>
+        <p>
+            1) Pathvariables (necessary to reach the endpoint)
+        </p>
+<pre>
+    <code>
+        app.get("/birds/:color", (req, res) => {
+            res.send({ data: req.params.color });
+        });
+    </code>
+</pre>
+        Used to access the named parameters (here: /:color) that are a part of the URL path.<br><br>
+        <p>
+            2) Query Strings (optional, not necessary to reach the endpoint)     
+        </p>
+<pre>
+    <code>
+        // from client: http://localhost:8080/bat?adjective=spooky
+        app.get("/bat", (req, res) => {
+            res.send({ data: `The bat is ${req.query.adjective}` });
+        });
+    </code>
+</pre>
+        Used to access the query parameters (here: ?adjective=spooky) that is a key-value pair.<br><br><br>    
+        
+        <h5 id="recieve">How can the client recieve data? (responses)</h5><br>
+        We have learned that a client can recieve a response in four ways:<br><br>
+        <p>    
+            1) res.sendFile(__dirname, "/path");
+        </p><br>
+        Used to send static files. "path" defines the file to be served. "__dirname" specifies from which directory the 
+        file should be served. See <a href="/serve_html">Serving HTML</a><br><br> 
+        <p>
+            2) res.sendFile(path.resolve("path"));
+        </p><br>
+        Used to send static files (the same as the line above). But this one uses path.resovle to handle "path"
+        relatively to the current working directory. Usefull when you want to send files that are not in the same directory 
+        as the app.js file. See <a href="/serve_html">Serving HTML</a><br><br>   
+        <p>
+            3) res.send();
+        </p><br>
+        Sends a string, object or array as a response to the client. Usefull when you want to send data dynamically e.g. 
+        from a database or API to the client. The data gets send in  resposne body either as plain text or JSON.<br><br>
+        In the code example with pure API birds, the HTTP response has the key <span class="emphasis">data</span>. This is 
+        a generic that indicates, you are sending <i>data</i> back to the client e.g. a list of birds or one bird etc.
+        When using the key <span class="emphasis">message</span> it indicates that you want to send an error message
+        back to the client.<br><br> 
+        <p>
+            4) res.redirect();
+        </p><br>
+        Method used to navigate the client to another URL. When res.redirect() is called the server sends an HTTP response 
+        to the client with the status code 302 (Found) and a location header containing the new URL. The client then 
+        automatically sends a new request to the new URL specified in the location header, and the server responds with the 
+        content that matches the URL. See <a href="/rendering">SSR & CSR</a><br><br><br>
+
+        <h3 id="pure">Pure API</h3><br>
+        An application programming interface that provides a clear, consistent and predictable
+        interface. The term "pure" emphasizes that the API is designed to be used for its
+        intended purpose and does not include any unnecessary functionality like e.g. frontend.
+        An example from this course would be the "BIRDS API".<br><br><br>
+        
+        <h3 id="how">HTTP-methods - how to do it in Express?</h3><br>
+        In the package <a href="/packages#express">Express</a> there are methods like: <span class="emphasis">app.get() / .post() / .patch() / .delete()" and "app.post"</span> 
+        etc. that allow you to define routes for HTTP GET, POST, PUT, PATCH and DELETE requests. The methods takes two arguments: 
+        the first is the route to match the request: <span class="emphasis">"/birds"</span> (if it doesn't match it will respond with 404 
+        Not Found), and the second argument is a callback function: <span class="emphasis">(req, res) =></span>, that will be called when 
+        the route is matched. The callback function takes two arguments: "req" (requests) and "res" (response) that represents the HTTP 
+        request and response. The <span class="emphasis">res.send({ })</span> object indicates that the response inside the curly brackets 
+        is JSON, because Express automatically makes the conversion from JavaScript objects to JSON for us.<br><br>    
+        
+        Following code is an example of a pure REST API design with the HTTP-methods.<br><br>
+<pre>
+    <code>      
+        app.get("/api/birds", (req, res) => {                      
+            res.send({ data : birds.birdList });               
+        });                                                    
+
+
+        app.get("/api/birds/:id", (req, res) => {                                                       
+            const { id } = req.params;                               
+            const birdWithId = birds.findById(id);                
+            res.send({ data : birdWithId });                         
+        });                                                   
+
+
+        app.get("/api/birds/color/:color", (req, res) => {         
+            const { color } = req.params;                      
+            const birdWithColor = birds.findByColor(color);    
+            res.send({ data : birdWithColor });                
+        });                                                   
+
+
+        app.post("/api/birds", (req, res) => {                                 
+            const { ...bird } = req.body;                      
+            const birdToSave = birds.createBird(bird);        
+            res.send({ data : birdToSave });             
+        });                                                   
+
+
+        app.patch("/api/birds/:id", (req, res) => {                
+            const { id } = req.params;                         
+            const { ...bird } = req.body;                      
+            const birdToUpdate = birds.updateBird(id, bird);  
+            res.send({ data: birdToUpdate });                 
+        });                                                  
+
+
+        app.delete("/api/birds/:id", (req, res) => {                          
+            const { id } = req.params;                         
+            const birdToDelete = birds.deleteBird(id);         
+            res.send({ data : birdToDelete});                  
+        });                                                    
+    </code>
+</pre>
+        All the endpoints have an "/api/" included because it's common convention for endpoints that return data in a machine-readable format
+        such as JSON - just data. If the endpoints returned a HTML page instead, then the "/api/" would not have been necessary.<br><br><br>  
+
+        <h3 id="json">JSON</h3><br>
+        "JavaScript Object Notation". A standard/specification that is easy for machines to parse 
+        and generate. Often used to transmit data between a server and a web application as an alternative
+        to XML. It is typically represented as a string with the following syntax of key-value pairs, 
+        enclosed curly brackets for objects and square brackets for arrays:<br>
+<pre>
+    <code>
+        {
+            "name": "Eagle",
+            "color": "Golden brown",
+            "diet": [
+                "Fish",
+                "Seeds",
+            ],
+            "country": "USA"
+        }
+    </code>
+</pre> 
+        Because it is a string format, and not plain strings, then every server can interpret the data that 
+        is being send, no matter the programming language and platform.
+    </h6>            
+</div>
