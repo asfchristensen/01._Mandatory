@@ -3,12 +3,113 @@
         <h3>Subjects</h3>
     </div>
     <div class="sidebar">
-        <a href="#"><button class="subject"></button></a>
-        <a href="#"><button class="subject"></button></a>
-        <a href="#"><button class="subject"></button></a>
+        <a href="#client"><button class="subject">Client-Side Redirection</button></a>
+        <a href="#server"><button class="subject">Server-Side Redirection</button></a>
+        <a href="#response"><button class="subject">Responses (301/302)</button></a>
+        <a href="#choose"><button class="subject">Which to choose: SSR or CSR?</button></a>
     </div>
 </div>
 
 <div class="col-8 mt-5">
-    <h1></h1>
-</div><br>
+    <h1>Redirection</h1><br><br>
+
+    <h6>
+        Redirection is a process of direction clients to a different web page or URL. There are two types of redirection: 
+        client-side redirection and server-side redirection.<br><br><br>
+
+       <h3 id="client">Client-Side Redirection</h3><br>
+       Occurs entirely on the user's browser, where the browser uses JavaScript to redirect the user to a new URL. The server is 
+       not involved. The client handles the redirection. This form is fast and efficient because it doesn't require any communication
+       with the server, but it is also less secure and can be manipulated by attackers. Useful if you want to redirect the user without 
+       reloading the page again e.g. if the user submits a form, you want to redirect them to a "thank you page" to show them the result 
+       of their submit. This can be achieved using:<br><br>
+       <p>
+            - window.location 
+       </p>
+<pre>
+    <code>
+        // redirects to a new URL
+        window.location.href = "https://test.com";
+
+        // redirects to the previous page
+        window.history.back();
+    </code>
+</pre>
+       <p>
+            - < meta > (automatically redirects)
+       </p>
+<pre>
+    <code>
+        < html > 
+        < head >
+            < title >Example< /title >
+            < meta http-equic="refresh" content=5;url=https://test.com" />
+        < / head > 
+    </code>
+</pre>
+       <p>
+            - Hyperlink
+       </p>
+<pre>
+    <code>
+        < a href="https://test.com" />
+    </code>
+</pre>
+        <p>
+            - HTML form with "action" attribute
+        </p>
+<pre>
+    <code>
+        < form action="https://test.com" >
+            < input type="submit" >
+        < /form >
+    </code>
+</pre><br>
+
+        <h3 id="server">Server-Side Redirection</h3><br>
+        Performed by the server itself. When the server recieves a request for a URL, it checks to see if a redirection is necessary and 
+        then sends the browser a response containing the new URL. This form is more secure, but also slower because it requires communication 
+        between the client and the server. This can be achieved using:<br><br>
+        <p>
+             - res.redirect()<br>
+             - With pathvariables and query strings 
+        </p>
+<pre>
+    <code>
+        // query string: localhost:8080/api/guards?passport=theskyisblue
+
+        app.get("/api/guards", (req, res) => {
+            if (req.query.passport === "theskyisblue") {
+                return res.redirect("/api/tanks");
+            } 
+            res.send({ message: "Not allowed. Type the secret with the key being passport."});
+        });
+    </code>
+</pre><br>     
+
+        <h3 id="response">Responses</h3><br>
+        (This is for server-side redirection only) When the browser recieves a response from the server, then it will automatically redirect 
+        the user to the specified URL along with a status code that indicates that a ressource has been moved to a new location:<br><br>
+        <p>
+            - 301 (Moved Permanently)<br>
+            - 302 (Found, Moved Temporarily)
+        </p>
+<pre>
+    <code>
+        app.get("/old-url", (req, res) => {
+            res.redirect(301, "new-url");
+        });
+    </code>
+</pre>
+        These status codes are part of the HTTP protocol.<br><br><br>
+
+        <h3 id="choose">Which redirection to choose?</h3><br>
+        Always use server-side redirection because it is more safe. If you were to use client-side redirection, you should use:<br><br>
+        <p>
+            - window.location<br>
+            - Hyperlink with < a ><br>
+            - HTML form with "action" attribute 
+        </p><br>
+        Don't use the "< meta >" because it is exposed to attackers and used maliciously. 
+    </h6>
+</div>

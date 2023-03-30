@@ -3,12 +3,173 @@
         <h3>Subjects</h3>
     </div>
     <div class="sidebar">
-        <a href="#"><button class="subject"></button></a>
-        <a href="#"><button class="subject"></button></a>
-        <a href="#"><button class="subject"></button></a>
+        <a href="#ssr"><button class="subject">SSR</button></a>
+        <a href="#csr"><button class="subject">CSR</button></a>
+        <a href="#plus-minus"><button class="subject">+ & - with SSR & CSR</button></a>
+        <a href="#ssr-setup"><button class="subject">SSR setup</button></a>
+        <a href="#memory"><button class="subject">How code affects memory</button></a>
     </div>
 </div>
 
 <div class="col-8 mt-5">
-    <h1></h1>
-</div><br>
+    <h1>SSR & CSR</h1><br><br>
+
+        <h6>
+            <h3 id="ssr">Server-Side Rendering</h3><br>
+            (SSR) Involves generating HTML on the server and sending it to the client as a complete page. When a user requests a page, the server 
+            fetches the necessary data, generates the HTML and sends it back to the client. The client then recieves a complete page and can 
+            display it immediately.<br><br><br> 
+            
+
+            <h3 id="csr">Client-Side Rendering</h3><br>
+            (CSR) Involves generating the initial HTML and JavaScript code on the client-side. When a user requests a page, the server sends a 
+            minimal HTML file and a JavaScript bundle. The JavaScript code is responsible for fetching the data and rendering the page on the 
+            client-side. This makes the page more dynamic and interactive.<br><br><br>
+
+            <h3 id="plus-minus">+ & - with SSR & CSR</h3><br><br>
+            <table class="table table-bordered table-warning">
+                <thead>
+                    <tr class="table-success">
+                        <th scope="col">Time</th>
+                        <th scope="col">Ressources</th>
+                        <th scope="col">SEO</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>SSR:<br>
+                            <p> 
+                                + Improves initial load time<br>
+                                - Takes longer to load other pages<br>
+                            </p>
+                        </td>
+                        <td>SSR:<br>
+                            <p>
+                                + Reduces amount of ressources on client-side<br>
+                                + More efficient with less dynamic content apps<br>
+                                - Demands more ressources
+                            </p>
+                        </td>
+                        <td>SSR:<br>
+                            <p>
+                                + Easier for serach engines to index the HTML<br>
+                                - If SSR not implemented correct - can lead to search engine punishment 
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>CSR:<br>
+                            <p>
+                                + Quick navigation<br>
+                                + Quick page transitions<br>
+                                - Slow initial load time
+                            </p>
+                        </td>
+                        <td>CSR:<br>
+                            <p>
+                                + Reduce load on server<br>
+                                - Demands more ressources client-side<br>
+                                - Slows down performance on old hardware 
+                            </p>
+                        </td>
+                        <td>CSR:<br>
+                            <p>
+                                + If CSR is implemented correct and SSR handles initial<br>
+                                - Problems if JS code is not crawlable and contains many errors, can slow down page load time 
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table><br><br>
+
+            <h3 id="ssr-setup">SSR setup in class</h3><br><br>
+            <p>
+                - Import the built-in module "fs"<br>
+                - Import an escape module to sanitize inputs<br>
+                - Create a templateEngine.js file in the util folder<br>
+                - Make the renderPage() and a readPage()<br>
+                - Export the functions 
+            </p><br>
+            
+            A template engine is used to generate dynamic HTML content based on data recieved from the server (SSR). This means it generates dynamic 
+            HTML content by combining data from the application with static templates from HTML. When using the template engine, the content of the 
+            template is typically stored in a file on the server. Here you use "fs.readFileSync().toString()" to read the contents of the HTML template 
+            file from the server's file system and convert it to a string. The string can then be used by the template engine to dynamically generate 
+            the HTML content (the concatenation in renderPage: return navbar + page + footer) to be sent to the client. The following code is meant to 
+            imitate a real template engine e.g. "Handlebars" that needs to be installed with npm.<br><br> 
+    <pre>
+        <code>
+        import fs from "fs";
+        
+        function renderPage(page, config = {}) {   
+            const navbar = fs.readFileSync("./public/components/navbar/navbar.html").toString()
+                            .replace("$TAB_TITLE", config.tabTitle || "Test")
+                            .replace("$CSS_LINK", config.cssLink || "")
+            const footer = fs.readFileSync("./public/components/footer/footer.html").toString()
+                            .replace("$FOOTER_YEAR", `© ${new Date().getFullYear()}`)
+        
+            return navbar + page + footer;
+        };
+        
+        function readPage(pagePath) {
+            return fs.readFileSync(pagePath).toString();
+        }
+        
+        export default {
+            renderPage,
+            readPage
+        }
+        </code>
+    </pre>
+            We should probably use fs.readFile() instead, because it reads files asynchronously, but it's an active choice to use <a href="/serve_html#fs-module">fs.readFileSync()</a> that 
+            reads files synchronously, because we want to block the server from reading and executing the files, because we are not ready at this time 
+            to render the HTML files. All the files in the project have be read and rendered before anything else can happen.<br><br><br>
+            
+            <div class="box-important">
+                Being in a dev environment and setting up SSR and want to check for changes every time you make changes in the source code, you have to 
+                make a nodemon.json file with the dependencies "ext":"js,html,json" and the write the command <a href="/terminal#update-with-sync">nodemon --ext html,js app.js</a>.
+            </div><br><br>
+
+            <p>
+                - Import the templateEngine in the app.js file to access the exported functions 
+            </p>
+    <pre>
+        <code>
+    import templateEngine from "./util/templateEngine.js"
+    
+    const frontpage = templateEngine.readPage("./public/pages/frontpage/frontpage.html");
+    const frontpagePage = templateEngine.renderPage(frontpage, {
+        tabTitle:  "Upper | Welcome"
+    });
+    
+    app.get("/", (req, res) => {
+        res.send(frontpagePage);
+    });
+        </code>
+    </pre>
+            <div class="box-important">
+                IMPORTANT: res.sendFile() is replaced with res.send(), because with res.sendFile() the files were send directly to the client for the browser to handle. Because of SSR we want 
+                to render the whole HTML page first and the send it to the client - why we use res.send() that sends the rendered page as a String.  
+            </div><br><br>
+            <p>
+                - Divide the HTML-page into components where the footer and navbar have their own folder in an components folder. See <a href="/app_setup">app.js setup</a> for folder structure and 
+                how to divide the HTML page for the respective components.<br><br>
+                - Make the HTML pages more dynamic and reusable as components (see <a href="/html_design">HTML</a>) 
+            </p><br><br>
+      
+            <h3 id="memory">How code affects the application's memory</h3><br>
+            <p>
+                - Code size
+            </p><br>
+            Large code files demands more memory to load and execute than small ones<br><br>
+            <p>
+                - Code execution 
+            </p><br>
+            Bad optimization of the code can cause ineffictive operations or create unnecessary variables that gets stored in memory. It 
+            could also be large objects or arrays that take up space in memory.<br><br>
+            <p>
+                - How code interacts with the rest of the source code
+            </p><br>
+            Code that makes "memory leaks" or can't free up space 
+    </h6>
+</div>
